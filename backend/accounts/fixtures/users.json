@@ -1,0 +1,138 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$bW0wY05oN0psTkFyaTUwRnFKMWFnbg$SEb3rNSFf+Dk3oi196zpb3H+q2ZWlKEYHcPmfyvVUck",
+        "first_name": "Patryk",
+        "last_name": "Beberok",
+        "email": "admin@example.com",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:41:02.572Z",
+        "date_joined": "2023-12-21T15:54:18.144Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$TExGVnVLeDZLbTdsRHhXMWdZd2dHVw$Ls1pI3ZezyF4f+LqytVNDICHzki3bv+BgSAF688yTp4",
+        "first_name": "Adam",
+        "last_name": "Kowalski",
+        "email": "adam.kowalski1098@gmail.com",
+        "is_superuser": false,
+        "is_staff": true,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:38:54.343Z",
+        "date_joined": "2023-09-15T21:21:58.757Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MUxESHhNbngwamVFMGJjWVl0WXJYcw$/GTgNBy15mF5PvDfJRRNCA4yYAdV7OpusciGJvbiXI0",
+        "first_name": "Grzegorz",
+        "last_name": "Bąk",
+        "email": "grzegorz.bak9012@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:50:25.148Z",
+        "date_joined": "2023-09-15T21:22:45.208Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$WUVCamQzNHpzSms5WVlkR2FyUGFndw$Q7HAJY90Pvfv49CHsTwZzkF3j/jSvXyCoEHxwee2MO8",
+        "first_name": "Michał",
+        "last_name": "Koniuszko",
+        "email": "michal.koniuszko1010@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:50:37.288Z",
+        "date_joined": "2023-12-21T18:06:50.832Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$d1FjMnZ3U1VWeldENmFQWGlFU2VzOQ$HK4YKxG2/lyDK0rLNL0knAvtrYqMu3e/bc9pBB1YqgU",
+        "first_name": "Jan",
+        "last_name": "Kowalski",
+        "email": "jan.kowalski0001@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:51:08.750Z",
+        "date_joined": "2023-12-21T18:07:12.125Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$bzBMMkFraWV0b1NlZUZqdGthd3UxUA$zdOn2qtCblhIfCWb4jmKjoGh+BQcW63E4d6Zw4Axh4U",
+        "first_name": "Mateusz",
+        "last_name": "Fiedeń",
+        "email": "mateusz.fieden0001@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:52:09.338Z",
+        "date_joined": "2023-12-21T18:07:34.819Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$UmNkYURidHZYdENlUHhXUlY5WFRrRw$Ov+6RBw8mBkfLhM3AwoZCX2wttF8Ru7lDoir32AhJcI",
+        "first_name": "Zbigniew",
+        "last_name": "Karski",
+        "email": "zbigniew.karski0001@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:52:20.727Z",
+        "date_joined": "2023-12-21T18:08:10.079Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 8,
+    "fields": {
+        "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$OGl2RTd6U2huc0RvcGg5d3Jsb1pvcg$E/XjwKzM0LmYonwjy+78H8u0ErjMya48RBUdUtLHjGQ",
+        "first_name": "Aleksandra",
+        "last_name": "Rzodkiewka",
+        "email": "aleksandra.rzodkiew0001@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "avatar": "accounts/avatars/default.png",
+        "phone_number": null,
+        "last_login": "2023-12-21T18:52:33.400Z",
+        "date_joined": "2023-12-21T18:08:52.165Z"
+    }
+}
+]
