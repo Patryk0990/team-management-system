@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load static %}
+
+{% block additional_css %}
+	<link href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+<div class="col-12 d-md-none d-flex justify-content-between bg-dark p-3">
+	<div class="ms-auto" id="sidebar-toggle-icon" onclick="toggleSidebar(event)">
+	    <span></span>
+	    <span></span>
+	    <span></span>
+	</div>
+</div>
+
+<div class="col-12 col-md-auto flex-column flex-shrink-0 p-3 text-bg-dark vh-100" id="sidebar">
+	<a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+		<image src="{% static 'images/logo.png' %}" class="bi pe-none me-2 nav-logo"/>
+		<span class="fs-5">{{ request.site.name }}</span>
+	</a>
+	<hr>
+	<ul class="nav flex-column flex-grow-1 px-3">
+		<li class="nav-item">
+			<a href="{% url 'dashboard' %}" class="nav-link active" aria-current="page">
+				 <i class="bi bi-house-fill" style="font-size: 1.5rem"></i> {% translate "Dashboard" %}
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-projects">
+				<i class="bi bi-kanban-fill" style="font-size: 1.5rem"></i> {% translate "Projects" %}
+			</a>
+			<ul class="collapse list-unstyled" id="collapse-projects">
+				{% if request.user.is_superuser %}
+					<li>
+						<a class="nav-link" href="{% url 'projects' %}">
+							<span class="small ps-3">{% translate 'Manage projects' %}</span>
+						</a>
+					</li>
+				{% if user_projects %}<hr>{% endif %}
+				{% endif %}
+				{% for project in user_projects %}
+					<li>
+						<a class="nav-link" href="{% url 'project' project_pk=project.pk %}">
+							<span class="small ps-3">{{ project.name }}</span>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</li>
+		{% if request.user.is_superuser %}
+		<li class="nav-item">
+			<a href="{% url 'users' %}" class="nav-link">
+				<i class="bi bi-people-fill" style="font-size: 1.5rem"></i> {% translate "Users" %}
+			</a>
+		</li>
+		{% endif %}
+	</ul>
+	<hr>
+	<div class="dropdown dropdown-center px-3">
+		<a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="{{ request.user.avatar.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
+			<strong>{{ request.user.first_name }}  {{ request.user.last_name }}</strong>
+		</a>
+		<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+			<li><a class="dropdown-item" href="{% url 'user-modify' pk=request.user.pk %}">{% translate "Edit" %}</a></li>
+			<li><a class="dropdown-item" href="{% url 'user-profile' pk=request.user.pk %}">{% translate "Profile" %}</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="{% url 'logout' %}">{% translate "Log out" %}</a></li>
+		</ul>
+	</div>
+</div>

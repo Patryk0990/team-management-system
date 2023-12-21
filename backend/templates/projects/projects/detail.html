@@ -1,0 +1,338 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+{% if request.user.is_superuser or request.user|is_project_manager:project %}
+
+	<div class="row top-controls align-items-center flex-column flex-lg-row mb-2 bg-dark-subtle">
+		<a class="btn col-auto text-center ms-lg-auto" role="button" data-bs-toggle="modal" data-bs-target="#createBoardModal">
+			<i class="bi bi-clipboard2-plus-fill fs-4"></i>
+			{% translate "Create board" %}
+		</a>
+
+		<a class="btn col-auto text-center" role="button" data-bs-toggle="modal" data-bs-target="#createProjectMemberModal">
+			<i class="bi bi-person-fill-add fs-4"></i>
+			{% translate "Create project member" %}
+		</a>
+
+		<div class="col-auto text-center">
+			<div class="dropdown-center">
+				<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="bi bi-gear-fill fs-4"></i>
+					{% translate "Settings" %}
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modifyProjectMemberModal">
+							{% translate 'Manage project members' %}
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#evaluateProjectMemberModal">
+							{% translate 'Evaluate project members' %}
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteProjectMemberModal">
+							{% translate 'Delete project member' %}
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modifyBoardModal">
+							{% translate 'Manage board' %}
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteBoardModal">
+							{% translate 'Delete board' %}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+{% endif %}
+
+<h1 class="text-center">{% translate "Projects" %}</h1>
+<h2 class="text-center text-secondary"> {{ project.name }} </h2>
+<div class="row g-4 mt-1">
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Boards" %}</h5>
+				<p class="card-text">
+					<ul class="list-unstyled ms-4">
+						{% if project.boards.exists %}
+							{% for board in project.boards.all %}
+								<li><a href="{% url 'board' project_pk=project.pk pk=board.pk %}">{{ board.name }}</a></li>
+							{% endfor %}
+						{% else %}
+							{% translate "No boards to display" %}
+						{% endif %}
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "My tasks" %}</h5>
+				<p class="card-text">
+					<ul class="list-unstyled ms-4">
+						{% if user_tasks %}
+							{% for task in user_tasks %}
+								<li>{{ task.name }} - {{ task.get_priority_display }} ({{ task.board_column.name }})</li>
+							{% endfor %}
+						{% else %}
+							{% translate "No assigned tasks" %}
+						{% endif %}
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Members" %}</h5>
+				<p class="card-text">
+					{% if project.members.exists %}
+						<ul class="list-unstyled ms-4">
+							{% for member in project.members.all %}
+								<li class="my-1">
+									<a href="{% url 'user-profile' pk=member.user.pk %}">
+										<img src="{{ member.user.avatar.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
+										{{ member.user.first_name }} {{ member.user.last_name }} {% if member.role != 'MAN' %}{% if member.rating %}(<span class="stars fs-5" style="--rating: {{ member.rating.overall|floatformat:'2u' }};"></span>){% endif %} {% endif %}<br>
+										{{ member.get_role_display }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<p class="text-center">{% translate 'No project members to display' %}</p>
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if request.user.is_superuser or request.user|is_project_manager:project %}
+
+	<div class="modal fade" id="createProjectMemberModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectMemberModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="createProjectMemberModalLabel"> {% translate "New project member" %} </h1>
+					<button type="reset" class="btn-close" data-target="create-project-member-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+				</div>
+				<div class="modal-body">
+					<form id="create-project-member-form" method="POST" action="{% url 'api-project-member-create' project_pk=project.pk %}" autocomplete="off">
+						{% csrf_token %}
+						{{ project_member_form }}
+					</form>
+					<div id="create-project-member-form-response"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-target="create-project-member-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="create-project-member-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modifyProjectMemberModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyProjectMemberModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modifyProjectMemberModalLabel"> {% translate "Project member" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="modify-project-member-select" data-target="modify-project-member-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeModifyModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="modify-project-member-select">{% translate 'Select project member' %}</label><br>
+					<select id="modify-project-member-select" class="form-control" data-target="modify-project-member-form" onchange="changeModifyFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if project.members.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for project_member in project.members.all %}
+								{% if project_member.role != 'MAN' %}
+									<option value="{{ project_member.pk }}">{{ project_member.user.first_name }} {{ project_member.user.last_name }}</option>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No members to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					<form id="modify-project-member-form" method="POST" data-schema-url="{% url 'api-project-member-modify' project_pk=project.pk pk='0' %}" autocomplete="off">
+						{% csrf_token %}
+					</form>
+					<div id="modify-project-member-form-response" class="text-center"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="modify-project-member-select" data-target="modify-project-member-form" data-bs-dismiss="modal" onclick="closeModifyModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="modify-project-member-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="evaluateProjectMemberModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="evaluateProjectMemberModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="evaluateProjectMemberModalLabel"> {% translate "Project member" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="evaluate-project-member-select" data-target="evaluate-project-member-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeModifyModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="evaluate-project-member-select">{% translate 'Select project member' %}</label><br>
+					<select id="evaluate-project-member-select" class="form-control" data-target="evaluate-project-member-form" onchange="changeModifyFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if project.members.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for project_member in project.members.all %}
+								{% if project_member.role != 'MAN' %}
+									<option value="{{ project_member.pk }}">{{ project_member.user.first_name }} {{ project_member.user.last_name }}</option>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No members to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					<form id="evaluate-project-member-form" method="POST" data-schema-url="{% url 'api-project-member-evaluate' project_pk=project.pk pk='0' %}" autocomplete="off">
+						{% csrf_token %}
+					</form>
+					<div id="evaluate-project-member-form-response" class="text-center"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="evaluate-project-member-select" data-target="evaluate-project-member-form" data-bs-dismiss="modal" onclick="closeModifyModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="evaluate-project-member-form" onclick="submitForm(event, true)">{% translate "Evaluate" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="deleteProjectMemberModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteProjectMemberModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteProjectMemberModalLabel"> {% translate "Delete project member" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="delete-project-member-select" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="delete-project-member-select">{% translate 'Select project member' %}</label><br>
+					<select id="delete-project-member-select" class="form-control" onchange="changeDeleteFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if project.members.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for project_member in project.members.all %}
+								{% if project_member.role != 'MAN' %}
+									<option value="{{ project_member.pk }}">{{ project_member.user.first_name }} {{ project_member.user.last_name }}</option>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No members to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					{% translate "Do you want to remove it?" %}
+					<div id="delete-project-member-response" class="text-center"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="delete-project-member-select" data-bs-dismiss="modal" onclick="closeDeleteModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-response-container-id="delete-project-member-response" data-schema-url="{% url 'api-project-member-delete' project_pk=project.pk pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="createBoardModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createBoardModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="createBoardModalLabel"> {% translate "New board" %} </h1>
+					<button type="reset" class="btn-close" data-target="create-board-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+				</div>
+				<div class="modal-body">
+					<form id="create-board-form" method="POST" action="{% url 'api-board-create' project_pk=project.pk %}" autocomplete="off">
+						{% csrf_token %}
+						{{ board_form }}
+					</form>
+					<div id="create-board-form-response"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-target="create-board-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="create-board-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modifyBoardModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyBoardModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modifyBoardModalLabel"> {% translate "Board" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="modify-board-select" data-target="modify-board-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeModifyModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="modify-board-select">{% translate 'Select board' %}</label><br>
+					<select id="modify-board-select" class="form-control" data-target="modify-board-form" onchange="changeModifyFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if project.boards.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for board in project.boards.all %}
+								<option value="{{ board.pk }}">{{ board.name }}</option>
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No boards to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					<form id="modify-board-form" method="POST" data-schema-url="{% url 'api-board-modify' project_pk=project.pk pk='0' %}" autocomplete="off">
+						{% csrf_token %}
+					</form>
+					<div id="modify-board-form-response" class="text-center"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="modify-board-select" data-target="modify-board-form" data-bs-dismiss="modal" onclick="closeModifyModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="modify-board-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="deleteBoardModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteBoardModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteBoardModalLabel"> {% translate "Delete board" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="delete-board-select" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="delete-board-select">{% translate 'Select board' %}</label><br>
+					<select id="delete-board-select" class="form-control" onchange="changeDeleteFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if project.boards.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for board in project.boards.all %}
+								<option value="{{ board.pk }}">{{ board.name }}</option>
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No boards to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					{% translate "Do you want to remove it?" %}
+					<div id="delete-board-response" class="text-center"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="delete-board-select" data-bs-dismiss="modal" onclick="closeDeleteModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-response-container-id="delete-board-response" data-schema-url="{% url 'api-board-delete' project_pk=project.pk pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endif %}
+
+{% endblock %}

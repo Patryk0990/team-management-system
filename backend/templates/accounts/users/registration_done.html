@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block additional_css %}
+<link href="{% static 'css/main_no_auth.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+	<div class="d-flex h-100 justify-content-center align-items-center">
+		<div class="col-12 col-lg-6 p-5 bg-light text-center" style="--bs-bg-opacity: .9;">
+			<h3 class="mb-4">
+				{% translate "Registration was successful" %}
+			</h3>
+			<p class="text-justify">
+				{% blocktranslate %}We have sent an email with an activation link to your account.{% endblocktranslate %}<br>
+				{% blocktranslate %}Check your email and verify your account by accessing the link you received.{% endblocktranslate %}<br>
+				{% blocktranslate %}Link will be valid for one day, after this time the account will be automatically deleted.{% endblocktranslate %}<br>
+				{% blocktranslate %}If you have not received the email, please contact the administrator.{% endblocktranslate %}
+			</p>
+			<a href="{% url 'index' %}" class="btn btn-primary mt-3">
+				{% translate "Home page" %}
+			</a>
+		</div>
+	</div>
+
+{% endblock %}

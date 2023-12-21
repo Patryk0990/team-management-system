@@ -1,0 +1,313 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+$primary: #91D451;
+$success: #91D451;
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/variables-dark";
+
+// 4. Include any default map overrides here
+$theme-colors: map-merge($theme-colors, (
+        "primary": $primary,
+        "success": $success
+));
+
+// 5. Include remainder of required parts
+@import "../bootstrap/scss/bootstrap";
+
+
+
+// Additional custom code here
+
+// General
+* {
+  font-family: "monospace", monospace;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.modal-body {
+  &.modal-select {
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+    border-top-left-radius: var(--bs-modal-inner-border-radius);
+    border-top-right-radius: var(--bs-modal-inner-border-radius);
+  }
+}
+
+#main-container {
+  height: 100%;
+  overflow-y: auto;
+
+  .row {
+    padding: 1rem !important;
+  }
+}
+
+.split-cols {
+  border-right: 0;
+}
+
+@include media-breakpoint-up(xl) {
+  .split-cols {
+    border-right: 2px solid;
+    &:nth-child(4n) {
+      border-right: 0;
+    }
+    &:nth-last-child(1) {
+      border-right: 0;
+    }
+  }
+}
+
+@include media-breakpoint-between(md, lg) {
+  .split-cols {
+    &:nth-child(odd) {
+      border-right: 2px solid;
+    }
+    &:nth-last-child(1) {
+      border-right: 0;
+    }
+  }
+}
+
+.loader {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--bs-primary);
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: relative;
+  animation: pulse 1s linear infinite;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--bs-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: scaleUp 1s linear infinite;
+  }
+}
+@keyframes scaleUp {
+  0% { transform: translate(-50%, -50%) scale(0) }
+  60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+}
+@keyframes pulse {
+  0% , 60% , 100%{ transform:  scale(1) }
+  80% { transform:  scale(1.2)}
+}
+
+@include media-breakpoint-down(md) {
+  #main-container {
+    padding-bottom: 8rem !important;
+  }
+}
+
+// --------------------------------------------------
+
+// Text classes
+.text-justify {
+  text-align: justify !important;
+}
+
+i.bi {
+  vertical-align: middle;
+}
+
+.btn {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out, transform .25s;
+  --bs-btn-active-border-color: var(--bs-btn-border-color);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.btn-primary {
+  --bs-btn-color: var(--bs-gray-dark);
+  --bs-btn-hover-color: var(--bs-gray-dark);
+  --bs-btn-active-color: var(--bs-gray-dark);
+  --bs-btn-disabled-color: var(--bs-gray-dark);
+}
+
+.stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-family: Times; // make sure ★ appears correctly
+  line-height: 1;
+
+  &::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--bs-primary) var(--percent), #fff var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// --------------------------------------------------
+
+// Form classes
+.form-group {
+  margin-bottom: 1rem;
+}
+// --------------------------------------------------
+
+// Override links behaviour
+a {
+  text-decoration: none;
+  color: var(--bs-secondary);
+  &:hover {
+    cursor: pointer;
+  }
+}
+// --------------------------------------------------
+
+// Table elements
+
+.priority-L {
+  color: var(--bs-green);
+}
+.priority-M {
+  color: var(--bs-yellow);
+}
+.priority-H {
+  color: var(--bs-red);
+}
+
+.card {
+  transition: all .25s;
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .card {
+    min-height: auto !important;
+  }
+}
+
+// --------------------------------------------------
+
+// Sidebar
+
+#sidebar {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: -100vw;
+  overflow-y: auto;
+  transition: .5s ease-in-out;
+
+  &.active {
+    left: 0;
+  }
+
+  .nav-item {
+    hr {
+      margin: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    }
+  }
+
+  .nav-link {
+    color: var(--bs-white);
+  }
+}
+
+@include media-breakpoint-up(md) {
+  #sidebar {
+    display: flex;
+    position: relative;
+    left: 0;
+    overflow-y: hidden;
+  }
+}
+
+#sidebar-toggle-icon {
+  z-index: 1001;
+  width: 3rem;
+  height: 2rem;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+
+  span {
+    display: block;
+    position: absolute;
+    height: .4rem;
+    width: 100%;
+    background: var(--bs-white);
+    border-radius: .4rem;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+
+    &:nth-child(1) {
+      top: 0;
+    }
+    &:nth-child(2) {
+      top: .8rem;
+    }
+    &:nth-child(3) {
+      top: 1.6rem;
+    }
+  }
+
+  &.active {
+    span:nth-child(1) {
+      top: .8rem;
+      transform: rotate(135deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      left: -3rem;
+    }
+
+    span:nth-child(3) {
+      top: .8rem;
+      transform: rotate(-135deg);
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  #sidebar-toggle-icon {
+    display: none;
+  }
+}
+
+.nav-logo {
+  height: 2rem;
+  width: auto;
+}
+
+// --------------------------------------------------

@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+<h1 class="text-center">{% translate "Hi" %}, {{ request.user }}</h1>
+<div class="row g-4 mt-1">
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Statistics" %}</h5>
+				<p class="card-text">
+					<ul class="list-unstyled ms-4">
+						<li>{% translate 'Overall rating' %}: {% if overall_rating %}<span class="stars" style="--rating: {{ overall_rating|floatformat:'2u' }};"></span>{% else %}-{% endif %}</li>
+						<li>{% translate 'Number of tasks completed in the last month' %}: {{ number_of_completed_tasks_in_the_last_month }}</li>
+						<li>{% translate 'Number of tasks completed' %}: {{ number_of_completed_tasks }}</li>
+						<li>{% translate 'Number of projects you have participated in' %}: {{ request.user.memberships.count }}</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Projects" %}</h5>
+				<p class="card-text">
+					{% if user_projects %}
+						<ul class="list-unstyled ms-4">
+							{% for user_project in user_projects %}
+								<li><a href="{% url 'project' project_pk=user_project.pk %}">{{ user_project.name }}</a></li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						{% translate 'No projects to display' %}
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Recent activity" %}</h5>
+				<p class="card-text">
+					{% if recent_comments %}
+						<ul class="list-unstyled ms-4">
+							{% for comment in recent_comments %}
+								<li>
+									<a href="{% url 'board' project_pk=comment.task.board_column.board.project.pk pk=comment.task.board_column.board.pk %}">
+										<figure>
+											<blockquote class="blockquote">
+									            <small>{{ comment.content }}</small>
+											</blockquote>
+										    <figcaption class="blockquote-footer">
+											    {{ comment.project_member.user }} ({% translate 'task' %} {{ comment.task.name }} {% translate 'in' %} {{ comment.project_member.project.name }})
+										    </figcaption>
+										</figure>
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						{% translate 'No comments to display' %}
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 col-lg-4">
+		<div class="card" style="min-height: 150px;">
+			<div class="card-body">
+				<h5 class="card-title text-center">{% translate "Tasks" %}</h5>
+				<div class="card-text row row-cols-1 row-cols-xl-2">
+					<div>
+						<h6 class="text-center">{% translate "Assigned" %}</h6>
+							{% if assigned_tasks %}
+								<ul class="list-unstyled">
+									{% for task in assigned_tasks %}
+										<li><a href="{% url 'board' project_pk=task.board_column.board.project.pk pk=task.board_column.board.pk %}">{{ task.name }} ({{ task.board_column.board.project.name }})</a></li>
+									{% endfor %}
+								</ul>
+							{% else %}
+								<p>{% translate 'No tasks to display' %}</p>
+							{% endif %}
+					</div>
+					<div>
+						<h6 class="text-center">{% translate "Done" %}</h6>
+						{% if completed_tasks %}
+							<ul class="list-unstyled">
+								{% for task in assigned_tasks %}
+									<li><a href="{% url 'board' project_pk=task.board_column.board.project.pk pk=task.board_column.board.pk %}">{{ task.name }} ({{ task.board_column.board.project.name }})</a></li>
+								{% endfor %}
+							</ul>
+						{% else %}
+							<p>{% translate 'No tasks to display' %}</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

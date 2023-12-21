@@ -1,0 +1,20 @@
+{% if widget.is_initial %}
+  <div class="d-flex  flex-column">
+
+    <div>
+      <img class="img-thumbnail img-fluid rounded" src="{{ widget.value.url }}" width="200" alt="{{ widget.initial_text }}">
+    </div>
+
+    {% if not widget.required %}
+      <div class="clearable-file-input">
+        <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+        <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}" {% if widget.attrs.disabled %} disabled{% endif %}>
+
+      </div>
+    {% endif %}
+
+{% endif %}
+    <div>
+    {{ widget.input_text }}:
+      <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+    </div>

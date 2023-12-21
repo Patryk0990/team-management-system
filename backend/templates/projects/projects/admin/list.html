@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row top-controls align-items-center flex-column flex-lg-row mb-2 bg-dark-subtle">
+	<a class="btn col-auto ms-lg-auto text-center" role="button" data-bs-toggle="modal" data-bs-target="#createProjectModal">
+		<i class="bi bi-plus-square-fill fs-4"></i>
+		{% translate "Create project" %}
+	</a>
+</div>
+
+<h1 class="text-center">{% translate "Projects" %}</h1>
+<div class="row g-4 mt-1 justify-content-center row-cols-1 row-cols-lg-auto mb-3">
+	{% if projects %}
+		<div class="col">
+			<table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{% translate 'Name' %}</th>
+                        <th scope="col">{% translate 'Members' %}</th>
+                        <th scope="col">{% translate 'Actions' %}</th>
+                    </tr>
+                </thead>
+				<tbody>
+					{% for project in projects %}
+						<tr role="button" data-bs-toggle="modal" data-bs-target="#modifyProjectModal" data-target="modify-project-form" onclick="setFormData(event, true, {'/0/': '/{{ project.pk }}/'})">
+							<td scope="row">{{ project.id }}</td>
+							<td>{{ project.name }}</td>
+							<td>{{ project.members.count }}</td>
+							<td>
+								<i class="bi bi-trash-fill text-danger p-1 opacity-75" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" role="button" onclick="setDeleteData(event, {'/0/': '/{{ project.pk }}/'})"></i>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% else %}
+		<p class="text-center">{% translate 'No projects to display' %}</p>
+	{% endif %}
+</div>
+
+<div class="modal fade" id="createProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="createProjectModalLabel"> {% translate "New project" %} </h1>
+				<button type="reset" class="btn-close" data-target="create-project-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="create-project-form" method="POST" action="{% url 'api-project-create' %}" autocomplete="off">
+					{% csrf_token %}
+					{{ project_form }}
+				</form>
+				<div id="create-project-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="create-project-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="create-project-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modifyProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyProjectModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="modifyProjectModalLabel"> {% translate "Project" %} </h1>
+				<i class="bi bi-pencil-fill fs-5 icon-button ms-3 text-success" data-target="modify-project-form" role="button" data-state="disabled" onclick="toggleFormInputs(event)"></i>
+				<button type="reset" class="btn-close" data-target="modify-project-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="modify-project-form" method="POST" data-schema-url="{% url 'api-project-modify' project_pk='0' %}" autocomplete="off">
+					{% csrf_token %}
+				</form>
+				<div id="modify-project-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="modify-project-form" data-bs-dismiss="modal" onclick="closeForm(event, true, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="modify-project-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteProjectModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="deleteProjectModalLabel"> {% translate "Delete project" %} </h1>
+				<button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteData(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				{% translate "Do you want to remove it?" %}
+				<div id="delete-project-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteData(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-response-container-id="delete-project-response" data-schema-url="{% url 'api-project-delete' project_pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

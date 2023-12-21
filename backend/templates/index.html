@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block additional_css %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+	<div class="col-12 col-lg-6 forms vh-100" style="display: none">
+		<form method="POST" id="register-form" class="{% if active_form == 'register' %}active{% endif %}" autocomplete="off">
+			{% csrf_token %}
+			<h1 class="text-center mb-4">{% translate "Registration" %}</h1>
+			{{ register_form }}
+			<input type="submit" class="btn btn-primary" name="register" value="{% translate 'Register' %}">
+			<p class="text-center mt-4">
+				{% translate "Already have an account?" %}&nbsp;
+				<a onclick="changeFormDisplay()" class="text-primary">{% translate "Log in" %}</a>
+			</p>
+		</form>
+		<form method="POST" id="login-form" class="{% if active_form == 'login' %}active{% endif %}" autocomplete="off">
+			{% csrf_token %}
+			<h1 class="text-center mb-4">{% translate "Login" %}</h1>
+			{{ login_form }}
+			<input type="submit" class="btn btn-primary" name="login" value="{% translate 'Log in' %}">
+			<p class="text-center mt-4">
+				{% translate "Don't have an account yet?" %}&nbsp;
+				<a onclick="changeFormDisplay()" class="text-primary">{% translate "Create one" %}</a>
+			</p>
+			<p class="text-center">
+				{% translate "Forgot you password?" %}&nbsp;
+				<a href="{% url 'password-reset' %}">{% translate "Reset it" %}</a>
+			</p>
+		</form>
+	</div>
+{% endblock %}
+
+{% block additional_js %}
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}

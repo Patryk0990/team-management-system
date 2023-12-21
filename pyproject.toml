@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "Team Management System"
+version = "0.1.0"
+description = "Team Management System is web application allowing to manage projects and teams. It includes chat communication between members of the organization."
+authors = ["Patryk Beberok <patryk.beberok09@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.11"
+psycopg2 = "^2.9.7"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "^7.1.0"}
+pillow = "^10.0.0"
+django = {version = "^5.0", extras = ["argon2"]}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

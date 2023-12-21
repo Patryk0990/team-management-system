@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		{% load static %}
+        <title>{% block title %}Team Management System{% endblock %}</title>
+
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
+		<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+
+		{% block additional_css %}{% endblock %}
+	</head>
+  	<body>
+
+		<main class="container-fluid h-100 g-0">
+			{% include "core/messages.html" %}
+
+			<div class="row row-cols-1 row-cols-md-2 h-100 g-0" id="main-container-row">
+				{% if user.is_authenticated %}
+					{% include "core/sidebar.html" %}
+				{% endif %}
+
+				<div id="main-container" class="col flex-grow-1 min-vh-100">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+
+		</main>
+
+	 	<!-- Optional Javascript -->
+        <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        {% block additional_js %}{% endblock %}
+	</body>
+</html>
