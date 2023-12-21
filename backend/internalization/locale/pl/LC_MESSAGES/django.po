@@ -1,0 +1,1130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-21 17:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: accounts/forms/login.py:6 templates/accounts/users/admin/list.html:21
+msgid "E-mail"
+msgstr "E-mail"
+
+#: accounts/forms/login.py:7
+msgid "Password"
+msgstr "Hasło"
+
+#: accounts/forms/password_reset.py:13
+msgid "User with given e-mail does not exist."
+msgstr "Użytkownik o podanym adresie e-mail nie istnieje."
+
+#: accounts/models/user.py:12
+msgid "first name"
+msgstr "imię"
+
+#: accounts/models/user.py:13
+msgid "last name"
+msgstr "nazwisko"
+
+#: accounts/models/user.py:14
+msgid "email address"
+msgstr "adres e-mail"
+
+#: accounts/models/user.py:15
+msgid "superuser status"
+msgstr "status superużytkownika"
+
+#: accounts/models/user.py:16
+msgid "staff status"
+msgstr "status personelu"
+
+#: accounts/models/user.py:17
+msgid "active"
+msgstr "aktywny"
+
+#: accounts/models/user.py:19 templates/accounts/users/profile.html:9
+msgid "avatar"
+msgstr "awatar"
+
+#: accounts/models/user.py:25
+msgid "phone number"
+msgstr "numer telefonu"
+
+#: accounts/models/user.py:26
+msgid "last login"
+msgstr "ostatnie logowanie"
+
+#: accounts/models/user.py:27
+msgid "date joined"
+msgstr "data dołączenia"
+
+#: accounts/utils/user_manager.py:19
+msgid "Email is required."
+msgstr "Email jest wymagany."
+
+#: accounts/utils/user_manager.py:21
+msgid "Password is required."
+msgstr "Hasło jest wymagane."
+
+#: accounts/utils/user_manager.py:23
+msgid "First name is required."
+msgstr "Imię jest wymagane."
+
+#: accounts/utils/user_manager.py:25
+msgid "Last name is required."
+msgstr "Nazwisko jest wymagane."
+
+#: accounts/validators/lowercase.py:12
+msgid "The password must contain at least 1 lowercase letter, a-z."
+msgstr "Hasło musi zawierać co najmniej 1 małą literę, a-z."
+
+#: accounts/validators/lowercase.py:19
+msgid "Your password must contain at least 1 lowercase letter, a-z."
+msgstr "Twoje hasło musi zawierać co najmniej 1 małą literę, a-z."
+
+#: accounts/validators/special_character.py:12
+msgid ""
+"The password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]."
+msgstr ""
+"Hasło musi zawierać co najmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-+=;:"
+"\\'\",<>./?]."
+
+#: accounts/validators/special_character.py:19
+msgid ""
+"Your password must contain at least 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]."
+msgstr ""
+"Twoje hasło musi zawierać co najmniej 1 symbol: [()[\\]{}|\\\\`~!@#$%^&*_\\-"
+"+=;:\\'\",<>./?]."
+
+#: accounts/validators/uppercase.py:12
+msgid "The password must contain at least 1 uppercase letter, A-Z."
+msgstr "Hasło musi zawierać co najmniej 1 wielką literę, A-Z."
+
+#: accounts/validators/uppercase.py:19
+msgid "Your password must contain at least 1 uppercase letter, A-Z."
+msgstr "Twoje hasło musi zawierać co najmniej 1 wielką literę, A-Z."
+
+#: accounts/views/index.py:33
+msgid "Account with this e-mail address is not active."
+msgstr "Konto z tym adresem e-mail jest nieaktywne."
+
+#: accounts/views/index.py:35
+msgid "Invalid e-mail address or password."
+msgstr "Nieprawidłowy adres e-mail lub hasło."
+
+#: accounts/views/users/admin/api/create.py:26
+msgid "User was created successfully."
+msgstr "Użytkownik został utworzony pomyślnie."
+
+#: accounts/views/users/admin/api/delete.py:18
+#: accounts/views/users/admin/api/modify.py:20
+#: accounts/views/users/admin/api/modify.py:35
+#: accounts/views/users/modify.py:26 accounts/views/users/modify.py:42
+#: accounts/views/users/profile.py:23
+msgid "User with this id does not exist."
+msgstr "Użytkownik o tym identyfikatorze nie istnieje."
+
+#: accounts/views/users/admin/api/delete.py:22
+msgid "User was deleted successfully."
+msgstr "Użytkownik został pomyślnie usunięty."
+
+#: accounts/views/users/admin/api/modify.py:51
+msgid "User was modified successfully."
+msgstr "Użytkownik został pomyślnie zmodyfikowany."
+
+#: accounts/views/users/email_verify.py:21
+msgid "Invalid link"
+msgstr "Nieprawidłowy link"
+
+#: accounts/views/users/email_verify.py:24
+msgid "Link is no longer valid"
+msgstr "Link jest już nieaktualny"
+
+#: accounts/views/users/modify.py:20 accounts/views/users/modify.py:36
+msgid "You are not allowed to edit this account data."
+msgstr "Nie możesz edytować danych tego konta."
+
+#: accounts/views/users/modify.py:52
+msgid "Successfully modified your data."
+msgstr "Pomyślnie zmodyfikowano dane."
+
+#: accounts/views/users/password_reset/complete.py:7
+#: templates/accounts/users/password_reset/password_reset_complete.html:13
+msgid "Password reset complete"
+msgstr "Resetowanie hasła zakończone"
+
+#: accounts/views/users/password_reset/confirm.py:8
+msgid "Enter new password"
+msgstr "Wprowadź nowe hasło"
+
+#: accounts/views/users/password_reset/done.py:7
+msgid "Password reset sent"
+msgstr "Wysłano prośbę o reset hasła"
+
+#: app/settings.py:146
+msgid "Polish"
+msgstr "Polski"
+
+#: app/settings.py:147
+msgid "English"
+msgstr "Angielski"
+
+#: projects/forms/project.py:9
+msgid "Project manager"
+msgstr "Menadżer projektu"
+
+#: projects/forms/tasks/comments/task.py:12
+msgid "Write a comment"
+msgstr "Napisz komentarz"
+
+#: projects/models/board.py:8 projects/models/board_column.py:8
+#: projects/models/project.py:6 projects/models/task.py:14
+msgid "name"
+msgstr "nazwa"
+
+#: projects/models/board.py:9 projects/models/project_member.py:16
+msgid "project"
+msgstr "projekt"
+
+#: projects/models/board_column.py:9
+msgid "board"
+msgstr "tablica"
+
+#: projects/models/project.py:7 projects/models/task.py:15
+msgid "description"
+msgstr "opis"
+
+#: projects/models/project_member.py:10
+msgid "Manager"
+msgstr "Menadżer"
+
+#: projects/models/project_member.py:11
+msgid "Developer"
+msgstr "Programista"
+
+#: projects/models/project_member.py:12
+msgid "Tester"
+msgstr "Tester"
+
+#: projects/models/project_member.py:14
+msgid "role"
+msgstr "rola"
+
+#: projects/models/project_member.py:15
+msgid "user"
+msgstr "użytkownik"
+
+#: projects/models/project_member_rating.py:9
+msgid "Bad"
+msgstr "Zły"
+
+#: projects/models/project_member_rating.py:10
+msgid "Insufficient"
+msgstr "Niewystarczający"
+
+#: projects/models/project_member_rating.py:11
+msgid "Satisfactory"
+msgstr "Zadowalający"
+
+#: projects/models/project_member_rating.py:12
+msgid "Good"
+msgstr "Dobry"
+
+#: projects/models/project_member_rating.py:13
+msgid "Excellent"
+msgstr "Doskonały"
+
+#: projects/models/project_member_rating.py:15
+msgid "hard skills"
+msgstr "umiejętności twarde"
+
+#: projects/models/project_member_rating.py:16
+msgid "soft skills"
+msgstr "umiejętności miękkie"
+
+#: projects/models/project_member_rating.py:17
+msgid "performance"
+msgstr "wydajność"
+
+#: projects/models/project_member_rating.py:18
+msgid "activity"
+msgstr "aktywność"
+
+#: projects/models/project_member_rating.py:20
+#: projects/models/task_comment.py:11
+msgid "project member"
+msgstr "członek projektu"
+
+#: projects/models/task.py:10
+msgid "Low"
+msgstr "Niski"
+
+#: projects/models/task.py:11
+msgid "Medium"
+msgstr "Średni"
+
+#: projects/models/task.py:12
+msgid "High"
+msgstr "Wysoki"
+
+#: projects/models/task.py:16
+msgid "priority"
+msgstr "priorytet"
+
+#: projects/models/task.py:17 projects/models/task_comment.py:10
+msgid "created at"
+msgstr "utworzony o godz"
+
+#: projects/models/task.py:18
+msgid "modified at"
+msgstr "zmodyfikowany o godz"
+
+#: projects/models/task.py:19
+msgid "is archived"
+msgstr "zarchiwizowany"
+
+#: projects/models/task.py:21
+msgid "board column"
+msgstr "kolumna tablicy"
+
+#: projects/models/task.py:24
+msgid "created by"
+msgstr "utworzony przez"
+
+#: projects/models/task.py:28
+msgid "assigned to"
+msgstr "przypisane do"
+
+#: projects/models/task_comment.py:9
+msgid "content"
+msgstr "treść"
+
+#: projects/models/task_comment.py:12 templates/dashboard.html:57
+msgid "task"
+msgstr "zadanie"
+
+#: projects/views/board_columns/api/create.py:19
+#: projects/views/boards/api/delete.py:17
+#: projects/views/boards/api/modify.py:20
+#: projects/views/boards/api/modify.py:34 projects/views/boards/detail.py:24
+#: projects/views/tasks/api/create.py:19
+msgid "Board with this id and project relation does not exist."
+msgstr "Tablica o tym identyfikatorem i relacji z projektem nie istnieje."
+
+#: projects/views/board_columns/api/create.py:39
+msgid "Board column was created successfully."
+msgstr "Kolumna tablicy została utworzona pomyślnie."
+
+#: projects/views/board_columns/api/delete.py:17
+#: projects/views/board_columns/api/modify.py:20
+#: projects/views/board_columns/api/modify.py:34
+msgid "Board column with this id and project/board relation does not exist."
+msgstr ""
+"Kolumna tablicy o tym identyfikatorem i relacji z projektem/tablicą nie "
+"istnieje."
+
+#: projects/views/board_columns/api/delete.py:24
+msgid "Board column was deleted successfully."
+msgstr "Kolumna tablicy została pomyślnie usunięta."
+
+#: projects/views/board_columns/api/modify.py:50
+msgid "Board column was modified successfully."
+msgstr "Kolumna tablicy została pomyślnie zmodyfikowana."
+
+#: projects/views/boards/api/create.py:18
+#: projects/views/project_members/api/create.py:18
+#: projects/views/projects/admin/api/delete.py:18
+#: projects/views/projects/admin/api/modify.py:20
+#: projects/views/projects/admin/api/modify.py:40
+#: projects/views/projects/detail.py:24
+msgid "Project with this id does not exist."
+msgstr "Projekt o tym identyfikatorze nie istnieje."
+
+#: projects/views/boards/api/create.py:36
+msgid "Board was created successfully."
+msgstr "Tablica została utworzona pomyślnie."
+
+#: projects/views/boards/api/delete.py:25
+msgid "Board was deleted successfully."
+msgstr "Tablica została pomyślnie usunięta."
+
+#: projects/views/boards/api/modify.py:50
+msgid "Board was modified successfully."
+msgstr "Tablica została zmodyfikowana pomyślnie."
+
+#: projects/views/project_members/api/create.py:36
+msgid "Project member was created successfully."
+msgstr "Członek projektu został utworzony pomyślnie."
+
+#: projects/views/project_members/api/delete.py:17
+#: projects/views/project_members/api/evaluate.py:20
+#: projects/views/project_members/api/evaluate.py:39
+#: projects/views/project_members/api/modify.py:20
+#: projects/views/project_members/api/modify.py:34
+msgid "Project member with this id and project relation does not exist."
+msgstr ""
+"Członek projektu o tym identyfikatorze i relacji z projektem nie istnieje."
+
+#: projects/views/project_members/api/delete.py:22
+msgid "Project member was deleted successfully."
+msgstr "Członek projektu został pomyślnie usunięty."
+
+#: projects/views/project_members/api/evaluate.py:60
+msgid "Project member was evaluated successfully."
+msgstr "Członek projektu został oceniony pomyślnie."
+
+#: projects/views/project_members/api/modify.py:50
+msgid "Project member was modified successfully."
+msgstr "Członek projektu został pomyślnie zmodyfikowany."
+
+#: projects/views/projects/admin/api/create.py:26
+msgid "Project was created successfully."
+msgstr "Projekt został utworzony pomyślnie."
+
+#: projects/views/projects/admin/api/delete.py:22
+msgid "Project was deleted successfully."
+msgstr "Projekt został pomyślnie usunięty."
+
+#: projects/views/projects/admin/api/modify.py:56
+msgid "Project was modified successfully."
+msgstr "Projekt został pomyślnie zmodyfikowany."
+
+#: projects/views/tasks/api/archive.py:16 projects/views/tasks/api/delete.py:18
+#: projects/views/tasks/api/modify.py:20 projects/views/tasks/api/modify.py:34
+#: projects/views/tasks/api/restore.py:16
+#: projects/views/tasks/comments/api/create.py:26
+#: projects/views/tasks/comments/api/create.py:49
+#: projects/views/tasks/comments/api/list.py:24
+msgid "Task with this id and project/board relation does not exist."
+msgstr ""
+"Zadanie o tym identyfikatorze i relacji z projektem/tablicą nie istnieje."
+
+#: projects/views/tasks/api/archive.py:22
+msgid "Task was archived successfully."
+msgstr "Zadanie zostało pomyślnie zarchiwizowane."
+
+#: projects/views/tasks/api/create.py:39
+msgid "User is not a member in this project."
+msgstr "Użytkownik nie jest członkiem tego projektu."
+
+#: projects/views/tasks/api/create.py:43
+msgid "Task was created successfully."
+msgstr "Zadanie zostało utworzone pomyślnie."
+
+#: projects/views/tasks/api/delete.py:22
+msgid "Task was deleted successfully."
+msgstr "Zadanie zostało pomyślnie usunięte."
+
+#: projects/views/tasks/api/modify.py:50
+msgid "Task was modified successfully."
+msgstr "Zadanie zostało zmodyfikowane pomyślnie."
+
+#: projects/views/tasks/api/restore.py:22
+msgid "Task was restored successfully."
+msgstr "Zadanie zostało pomyślnie przywrócone."
+
+#: projects/views/tasks/comments/api/create.py:20
+#: projects/views/tasks/comments/api/create.py:42
+msgid "You are not a member of this project."
+msgstr "Nie jesteś członkiem tego projektu."
+
+#: projects/views/tasks/comments/api/create.py:66
+msgid "Comment was created successfully."
+msgstr "Komentarz został utworzony pomyślnie."
+
+#: projects/views/tasks/comments/api/list.py:28
+msgid "No comments to display."
+msgstr "Brak komentarzy do wyświetlenia."
+
+#: templates/accounts/users/admin/list.html:9
+msgid "Create user"
+msgstr "Utwórz użytkownika"
+
+#: templates/accounts/users/admin/list.html:13 templates/core/sidebar.html:53
+msgid "Users"
+msgstr "Użytkownicy"
+
+#: templates/accounts/users/admin/list.html:22
+msgid "Staff"
+msgstr "Personel"
+
+#: templates/accounts/users/admin/list.html:23
+msgid "Super user"
+msgstr "Super użytkownik"
+
+#: templates/accounts/users/admin/list.html:24
+msgid "Active"
+msgstr "Aktywny"
+
+#: templates/accounts/users/admin/list.html:25
+msgid "Last login"
+msgstr "Ostatnie logowanie"
+
+#: templates/accounts/users/admin/list.html:26
+msgid "Date joined"
+msgstr "Data dołączenia"
+
+#: templates/accounts/users/admin/list.html:27
+#: templates/projects/projects/admin/list.html:23
+msgid "Actions"
+msgstr "Akcje"
+
+#: templates/accounts/users/admin/list.html:69
+msgid "No users to display"
+msgstr "Brak użytkowników do wyświetlenia"
+
+#: templates/accounts/users/admin/list.html:77
+msgid "New user"
+msgstr "Nowy użytkownik"
+
+#: templates/accounts/users/admin/list.html:88
+#: templates/accounts/users/admin/list.html:109
+#: templates/accounts/users/admin/list.html:127
+#: templates/projects/boards/detail.html:102
+#: templates/projects/boards/detail.html:123
+#: templates/projects/boards/detail.html:141
+#: templates/projects/boards/detail.html:178
+#: templates/projects/boards/detail.html:196
+#: templates/projects/boards/detail.html:219
+#: templates/projects/boards/detail.html:243
+#: templates/projects/boards/detail.html:276
+#: templates/projects/boards/detail.html:307
+#: templates/projects/projects/admin/list.html:60
+#: templates/projects/projects/admin/list.html:81
+#: templates/projects/projects/admin/list.html:99
+#: templates/projects/projects/detail.html:139
+#: templates/projects/projects/detail.html:174
+#: templates/projects/projects/detail.html:209
+#: templates/projects/projects/detail.html:242
+#: templates/projects/projects/detail.html:264
+#: templates/projects/projects/detail.html:297
+#: templates/projects/projects/detail.html:328
+msgid "Close"
+msgstr "Zamknij"
+
+#: templates/accounts/users/admin/list.html:89
+#: templates/projects/boards/detail.html:103
+#: templates/projects/boards/detail.html:244
+#: templates/projects/projects/admin/list.html:61
+#: templates/projects/projects/detail.html:140
+#: templates/projects/projects/detail.html:265
+msgid "Create"
+msgstr "Utwórz"
+
+#: templates/accounts/users/admin/list.html:98
+msgid "User"
+msgstr "Użytkownik"
+
+#: templates/accounts/users/admin/list.html:110
+#: templates/accounts/users/modify.html:13
+#: templates/projects/boards/detail.html:124
+#: templates/projects/boards/detail.html:277
+#: templates/projects/projects/admin/list.html:82
+#: templates/projects/projects/detail.html:175
+#: templates/projects/projects/detail.html:298
+msgid "Modify"
+msgstr "Zmodyfikuj"
+
+#: templates/accounts/users/admin/list.html:119
+msgid "Delete user"
+msgstr "Usuń użytkownika"
+
+#: templates/accounts/users/admin/list.html:123
+#: templates/projects/boards/detail.html:192
+#: templates/projects/boards/detail.html:303
+#: templates/projects/projects/admin/list.html:95
+#: templates/projects/projects/detail.html:238
+#: templates/projects/projects/detail.html:324
+msgid "Do you want to remove it?"
+msgstr "Czy chcesz go usunąć?"
+
+#: templates/accounts/users/admin/list.html:128
+#: templates/projects/boards/detail.html:197
+#: templates/projects/boards/detail.html:308
+#: templates/projects/projects/admin/list.html:100
+#: templates/projects/projects/detail.html:243
+#: templates/projects/projects/detail.html:329
+msgid "Confirm"
+msgstr "Zatwierdź"
+
+#: templates/accounts/users/email_verify_complete.html:14
+#: templates/accounts/users/registration_done.html:14
+msgid "Registration was successful"
+msgstr "Rejestracja przebiegła pomyślnie"
+
+#: templates/accounts/users/email_verify_complete.html:17
+msgid "E-mail has been successfully verified"
+msgstr "E-mail został pomyślnie zweryfikowany"
+
+#: templates/accounts/users/email_verify_complete.html:20
+#: templates/accounts/users/password_reset/password_reset.html:20
+#: templates/accounts/users/password_reset/password_reset_complete.html:18
+#: templates/accounts/users/password_reset/password_reset_confirm.html:23
+#: templates/accounts/users/password_reset/password_reset_confirm.html:38
+#: templates/accounts/users/password_reset/password_reset_done.html:19
+#: templates/accounts/users/registration_done.html:23
+msgid "Home page"
+msgstr "Strona główna"
+
+#: templates/accounts/users/modify.html:6
+msgid "User modify"
+msgstr "Modyfikacja użytkownika"
+
+#: templates/accounts/users/password_reset/password_reset.html:13
+msgid "Forgot your password?"
+msgstr "Zapomniałeś hasła?"
+
+#: templates/accounts/users/password_reset/password_reset.html:24
+msgid "Send me instructions!"
+msgstr "Wyślij mi instrukcje!"
+
+#: templates/accounts/users/password_reset/password_reset_complete.html:15
+msgid "Your new password has been set. You can log in to your account."
+msgstr ""
+"Twoje nowe hasło zostało ustawione. Możesz zalogować się na swoje konto."
+
+#: templates/accounts/users/password_reset/password_reset_confirm.html:13
+#: templates/mails/accounts/users/password_reset/password_reset.html:16
+msgid "Reset password"
+msgstr "Resetowanie hasła"
+
+#: templates/accounts/users/password_reset/password_reset_confirm.html:27
+msgid "Change my password"
+msgstr "Zmień moje hasło"
+
+#: templates/accounts/users/password_reset/password_reset_confirm.html:35
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"Link do resetowania hasła był nieprawidłowy, prawdopodobnie dlatego, że "
+"został już użyty. Poproś o nowy reset hasła."
+
+#: templates/accounts/users/password_reset/password_reset_done.html:13
+msgid "Password reset mail was sent"
+msgstr "Wiadomość z resetem hasła została wysłana"
+
+#: templates/accounts/users/password_reset/password_reset_done.html:15
+msgid "To reset your password, follow the instructions in the mail."
+msgstr ""
+"Aby zresetować hasło, postępuj zgodnie z instrukcjami zawartymi w wiadomości "
+"e-mail."
+
+#: templates/accounts/users/password_reset/password_reset_done.html:16
+msgid "You should receive the email shortly!"
+msgstr "Wkrótce powinieneś otrzymać wiadomość e-mail!"
+
+#: templates/accounts/users/profile.html:14
+msgid "Score"
+msgstr "Ocena"
+
+#: templates/accounts/users/profile.html:17
+#: templates/accounts/users/profile.html:51
+msgid "Overall"
+msgstr "Ogólnie"
+
+#: templates/accounts/users/profile.html:20
+msgid "Hard skills"
+msgstr "Umiejętności twarde"
+
+#: templates/accounts/users/profile.html:23
+msgid "Soft skills"
+msgstr "Umiejętności miękkie"
+
+#: templates/accounts/users/profile.html:26
+msgid "Performance"
+msgstr "Wydajność"
+
+#: templates/accounts/users/profile.html:29
+msgid "Activity"
+msgstr "Aktywność"
+
+#: templates/accounts/users/profile.html:32
+msgid "No ratings to display"
+msgstr "Brak ocen do wyświetlenia"
+
+#: templates/accounts/users/profile.html:36 templates/core/sidebar.html:30
+#: templates/dashboard.html:27 templates/projects/projects/admin/list.html:13
+#: templates/projects/projects/detail.html:58
+msgid "Projects"
+msgstr "Projekty"
+
+#: templates/accounts/users/profile.html:40
+msgid "as"
+msgstr "jako"
+
+#: templates/accounts/users/profile.html:44 templates/dashboard.html:36
+#: templates/projects/projects/admin/list.html:41
+msgid "No projects to display"
+msgstr "Brak projektów do wyświetlenia"
+
+#: templates/accounts/users/profile.html:48
+msgid "Completed tasks"
+msgstr "Ukończone zadania"
+
+#: templates/accounts/users/profile.html:59
+msgid "No tasks completed"
+msgstr "Brak ukończonych zadań"
+
+#: templates/accounts/users/registration_done.html:17
+msgid "We have sent an email with an activation link to your account."
+msgstr "Wysłaliśmy wiadomość e-mail z linkiem aktywacyjnym do konta."
+
+#: templates/accounts/users/registration_done.html:18
+msgid ""
+"Check your email and verify your account by accessing the link you received."
+msgstr ""
+"Sprawdź pocztę e-mail i zweryfikuj swoje konto, korzystając z otrzymanego "
+"linku."
+
+#: templates/accounts/users/registration_done.html:19
+msgid ""
+"Link will be valid for one day, after this time the account will be "
+"automatically deleted."
+msgstr ""
+"Link będzie ważny przez jeden dzień, po tym czasie konto zostanie "
+"automatycznie usunięte."
+
+#: templates/accounts/users/registration_done.html:20
+msgid "If you have not received the email, please contact the administrator."
+msgstr ""
+"Jeśli nie otrzymałeś wiadomości e-mail, skontaktuj się z administratorem."
+
+#: templates/core/sidebar.html:25
+msgid "Dashboard"
+msgstr "Panel"
+
+#: templates/core/sidebar.html:36
+msgid "Manage projects"
+msgstr "Zarządzanie projektami"
+
+#: templates/core/sidebar.html:65
+msgid "Edit"
+msgstr "Edytuj"
+
+#: templates/core/sidebar.html:66
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/core/sidebar.html:68
+msgid "Log out"
+msgstr "Wyloguj się"
+
+#: templates/dashboard.html:7
+#: templates/mails/accounts/users/email_verify.html:9
+#: templates/mails/accounts/users/password_reset/password_reset.html:9
+msgid "Hi"
+msgstr "Cześć"
+
+#: templates/dashboard.html:12
+msgid "Statistics"
+msgstr "Statystyki"
+
+#: templates/dashboard.html:15
+msgid "Overall rating"
+msgstr "Ocena ogólna"
+
+#: templates/dashboard.html:16
+msgid "Number of tasks completed in the last month"
+msgstr "Liczba ukończonych zadań w ciągu ostatniego miesiąca"
+
+#: templates/dashboard.html:17
+msgid "Number of tasks completed"
+msgstr "Liczba ukończonych zadań"
+
+#: templates/dashboard.html:18
+msgid "Number of projects you have participated in"
+msgstr "Liczba projektów, w których brałeś udział"
+
+#: templates/dashboard.html:45
+msgid "Recent activity"
+msgstr "Ostatnia aktywność"
+
+#: templates/dashboard.html:57
+msgid "in"
+msgstr "w"
+
+#: templates/dashboard.html:65
+msgid "No comments to display"
+msgstr "Brak komentarzy do wyświetlenia"
+
+#: templates/dashboard.html:74
+msgid "Tasks"
+msgstr "Zadania"
+
+#: templates/dashboard.html:77
+msgid "Assigned"
+msgstr "Przypisane"
+
+#: templates/dashboard.html:85 templates/dashboard.html:97
+#: templates/projects/boards/detail.html:169
+msgid "No tasks to display"
+msgstr "Brak zadań do wyświetlenia"
+
+#: templates/dashboard.html:89
+msgid "Done"
+msgstr "Ukończone"
+
+#: templates/index.html:14
+msgid "Registration"
+msgstr "Rejestracja"
+
+#: templates/index.html:16
+msgid "Register"
+msgstr "Zarejestruj się"
+
+#: templates/index.html:18
+msgid "Already have an account?"
+msgstr "Masz już konto?"
+
+#: templates/index.html:19 templates/index.html:26
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: templates/index.html:24
+msgid "Login"
+msgstr "Logowanie"
+
+#: templates/index.html:28
+msgid "Don't have an account yet?"
+msgstr "Nie masz jeszcze konta?"
+
+#: templates/index.html:29
+msgid "Create one"
+msgstr "Utwórz je"
+
+#: templates/index.html:32
+msgid "Forgot you password?"
+msgstr "Zapomniałeś hasła?"
+
+#: templates/index.html:33
+msgid "Reset it"
+msgstr "Zresetuj je"
+
+#: templates/mails/accounts/users/email_verify.html:6
+msgid "E-mail address verification"
+msgstr "Weryfikacja adresu e-mail"
+
+#: templates/mails/accounts/users/email_verify.html:10
+msgid "To confirm your email address, please click on the link below:"
+msgstr "Aby potwierdzić swój adres e-mail, kliknij poniższy link:"
+
+#: templates/mails/accounts/users/email_verify.html:14
+msgid "Verify e-mail address"
+msgstr "Zweryfikuj adres e-mail"
+
+#: templates/mails/accounts/users/email_verify.html:18
+#: templates/mails/accounts/users/password_reset/password_reset.html:21
+msgid "If the button does not work for any reason, please use the link below:"
+msgstr ""
+"Jeśli przycisk z jakiegoś powodu nie działa, skorzystaj z poniższego linku:"
+
+#: templates/mails/accounts/users/email_verify.html:24
+msgid "If you have not registered on our site, please ignore this message."
+msgstr ""
+"Jeśli nie zarejestrowałeś się na naszej stronie, zignoruj tę wiadomość."
+
+#: templates/mails/accounts/users/email_verify.html:28
+#: templates/mails/accounts/users/password_reset/password_reset.html:28
+msgid "Regards"
+msgstr "Pozdrowienia"
+
+#: templates/mails/accounts/users/email_verify.html:29
+#: templates/mails/accounts/users/password_reset/password_reset.html:29
+msgid "The"
+msgstr ""
+
+#: templates/mails/accounts/users/email_verify.html:29
+#: templates/mails/accounts/users/password_reset/password_reset.html:29
+msgid "team"
+msgstr "zespół"
+
+#: templates/mails/accounts/users/email_verify_subject.txt:3
+msgid "verify your e-mail address"
+msgstr "zweryfikuj swój adres e-mail"
+
+#: templates/mails/accounts/users/password_reset/password_reset.html:6
+msgid "Password reset"
+msgstr "Resetowanie hasła"
+
+#: templates/mails/accounts/users/password_reset/password_reset.html:10
+msgid ""
+"We have sent you this email because we received information that you want to "
+"reset your password."
+msgstr ""
+"Wysłaliśmy Ci tę wiadomość e-mail, ponieważ otrzymaliśmy informację, że "
+"chcesz zresetować swoje hasło."
+
+#: templates/mails/accounts/users/password_reset/password_reset.html:11
+msgid ""
+"Once you have set your password, don't forget to log in to the application."
+msgstr "Po ustawieniu hasła nie zapomnij zalogować się do aplikacji."
+
+#: templates/mails/accounts/users/password_reset/password_reset_subject.txt:3
+msgid "reset your password"
+msgstr "zresetuj swoje hasło"
+
+#: templates/projects/boards/detail.html:14
+msgid "Create task"
+msgstr "Utwórz zadanie"
+
+#: templates/projects/boards/detail.html:20
+msgid "Create board column"
+msgstr "Utwórz kolumnę tablicy"
+
+#: templates/projects/boards/detail.html:29
+#: templates/projects/projects/detail.html:23
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: templates/projects/boards/detail.html:35
+msgid "Manage board columns"
+msgstr "Zarządzanie kolumnami tablicy"
+
+#: templates/projects/boards/detail.html:40
+msgid "Delete board columns"
+msgstr "Usuń kolumny tablicy"
+
+#: templates/projects/boards/detail.html:46
+msgid "Restore task"
+msgstr "Przywróć zadanie"
+
+#: templates/projects/boards/detail.html:55
+#: templates/projects/projects/detail.html:64
+msgid "Boards"
+msgstr "Tablice"
+
+#: templates/projects/boards/detail.html:83
+#: templates/projects/boards/detail.html:265
+#: templates/projects/boards/detail.html:298
+msgid "No columns to display"
+msgstr "Brak kolumn do wyświetlenia"
+
+#: templates/projects/boards/detail.html:91
+msgid "New task"
+msgstr "Nowe zadanie"
+
+#: templates/projects/boards/detail.html:112
+msgid "Task"
+msgstr "Zadanie"
+
+#: templates/projects/boards/detail.html:133
+msgid "Archive task"
+msgstr "Zarchiwizuj zadanie"
+
+#: templates/projects/boards/detail.html:137
+msgid "Do you want to archive this task and mark it as done?"
+msgstr "Czy chcesz zarchiwizować to zadanie i oznaczyć je jako wykonane?"
+
+#: templates/projects/boards/detail.html:142
+msgid "Archive"
+msgstr "Zarchiwizuj"
+
+#: templates/projects/boards/detail.html:151
+#: templates/projects/boards/detail.html:286
+msgid "Delete board column"
+msgstr "Usuń kolumnę tablicy"
+
+#: templates/projects/boards/detail.html:155
+msgid "Select task"
+msgstr "Wybierz zadanie"
+
+#: templates/projects/boards/detail.html:174
+msgid "Do you want to restore it?"
+msgstr "Czy chcesz go przywrócić?"
+
+#: templates/projects/boards/detail.html:179
+msgid "Restore"
+msgstr "Przywróć"
+
+#: templates/projects/boards/detail.html:188
+msgid "Delete task"
+msgstr "Usuń zadanie"
+
+#: templates/projects/boards/detail.html:206
+msgid "Comments"
+msgstr "Komentarze"
+
+#: templates/projects/boards/detail.html:220
+msgid "Add comment"
+msgstr "Dodaj komentarz"
+
+#: templates/projects/boards/detail.html:232
+msgid "New board column"
+msgstr "Nowa kolumna tablicy"
+
+#: templates/projects/boards/detail.html:253
+msgid "Board column"
+msgstr "Kolumna tablicy"
+
+#: templates/projects/boards/detail.html:257
+#: templates/projects/boards/detail.html:290
+msgid "Select board column"
+msgstr "Wybierz kolumnę tablicy"
+
+#: templates/projects/projects/admin/list.html:9
+msgid "Create project"
+msgstr "Utwórz projekt"
+
+#: templates/projects/projects/admin/list.html:21
+msgid "Name"
+msgstr "Nazwa"
+
+#: templates/projects/projects/admin/list.html:22
+#: templates/projects/projects/detail.html:100
+msgid "Members"
+msgstr "Członkowie"
+
+#: templates/projects/projects/admin/list.html:49
+msgid "New project"
+msgstr "Nowy projekt"
+
+#: templates/projects/projects/admin/list.html:70
+msgid "Project"
+msgstr "Projekt"
+
+#: templates/projects/projects/admin/list.html:91
+msgid "Delete project"
+msgstr "Usuń projekt"
+
+#: templates/projects/projects/detail.html:11
+msgid "Create board"
+msgstr "Utwórz tablicę"
+
+#: templates/projects/projects/detail.html:16
+msgid "Create project member"
+msgstr "Dodaj członka projektu"
+
+#: templates/projects/projects/detail.html:28
+msgid "Manage project members"
+msgstr "Zarządzanie członkami projektu"
+
+#: templates/projects/projects/detail.html:33
+msgid "Evaluate project members"
+msgstr "Oceń członka projektu"
+
+#: templates/projects/projects/detail.html:38
+#: templates/projects/projects/detail.html:219
+msgid "Delete project member"
+msgstr "Usuń członka projektu"
+
+#: templates/projects/projects/detail.html:43
+msgid "Manage board"
+msgstr "Zarządzanie tablicą"
+
+#: templates/projects/projects/detail.html:48
+#: templates/projects/projects/detail.html:307
+msgid "Delete board"
+msgstr "Usuń tablicę"
+
+#: templates/projects/projects/detail.html:72
+#: templates/projects/projects/detail.html:286
+#: templates/projects/projects/detail.html:319
+msgid "No boards to display"
+msgstr "Brak tablic do wyświetlenia"
+
+#: templates/projects/projects/detail.html:82
+msgid "My tasks"
+msgstr "Moje zadania"
+
+#: templates/projects/projects/detail.html:90
+msgid "No assigned tasks"
+msgstr "Brak przypisanych zadań"
+
+#: templates/projects/projects/detail.html:114
+msgid "No project members to display"
+msgstr "Brak członków projektu do wyświetlenia"
+
+#: templates/projects/projects/detail.html:128
+msgid "New project member"
+msgstr "Nowy członek projektu"
+
+#: templates/projects/projects/detail.html:149
+#: templates/projects/projects/detail.html:184
+msgid "Project member"
+msgstr "Członek projektu"
+
+#: templates/projects/projects/detail.html:153
+#: templates/projects/projects/detail.html:188
+#: templates/projects/projects/detail.html:223
+msgid "Select project member"
+msgstr "Wybierz członka projektu"
+
+#: templates/projects/projects/detail.html:163
+#: templates/projects/projects/detail.html:198
+#: templates/projects/projects/detail.html:233
+msgid "No members to display"
+msgstr "Brak członków do wyświetlenia"
+
+#: templates/projects/projects/detail.html:210
+msgid "Evaluate"
+msgstr "Oceń"
+
+#: templates/projects/projects/detail.html:253
+msgid "New board"
+msgstr "Nowa tablica"
+
+#: templates/projects/projects/detail.html:274
+msgid "Board"
+msgstr "Tablica"
+
+#: templates/projects/projects/detail.html:278
+#: templates/projects/projects/detail.html:311
+msgid "Select board"
+msgstr "Wybierz tablicę"
+
+#: templates/projects/tasks/comments/list.html:14
+msgid "Task comments page navigation"
+msgstr "Nawigacja po stronie komentarzy do zadań"
+
+#: templates/projects/tasks/comments/list.html:17
+msgid "Latest"
+msgstr "Najnowsze"
+
+#: templates/projects/tasks/comments/list.html:31
+msgid "Oldest"
+msgstr "Najstarsze"
+
+#: utils/mixins/api/ajax_required_mixin.py:8
+msgid "Invalid Request"
+msgstr "Nieprawidłowe żądanie"
+
+#: utils/mixins/api/auth_required_mixin.py:10
+msgid "You need to be authenticated to access this resource."
+msgstr "Dostęp do tego zasobu wymaga uwierzytelnienia."
+
+#: utils/mixins/api/project_manager_required_mixin.py:14
+#: utils/mixins/project_manager_required_mixin.py:16
+msgid "You need to be a manager of this project to access this resource."
+msgstr ""
+"Aby uzyskać dostęp do tego zasobu, musisz być menedżerem tego projektu."
+
+#: utils/mixins/api/project_member_required_mixin.py:14
+#: utils/mixins/project_member_required_mixin.py:16
+msgid "You need to be a member of this project to access this resource."
+msgstr "Aby uzyskać dostęp do tego zasobu, musisz być członkiem tego projektu."
+
+#: utils/mixins/api/super_user_required_mixin.py:10
+#: utils/mixins/super_user_required_mixin.py:12
+msgid "You need to be a super user to access this resource."
+msgstr "Aby uzyskać dostęp do tego zasobu, musisz być superużytkownikiem."
+
+#: utils/mixins/auth_required_mixin.py:14
+msgid "You need to be authenticated to access this page."
+msgstr "Dostęp do tej strony wymaga uwierzytelnienia."
