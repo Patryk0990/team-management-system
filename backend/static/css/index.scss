@@ -1,0 +1,54 @@
+$dark-blue: #052e5c;
+$navy: #172144;
+$cream-white: #f8f9fa;
+$ivory: #F8F8FF;
+$white: #FFF;
+$lime-green: #91D451;
+$dark: #343a40;
+
+body {
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.forms {
+    left: 0;
+    background-color: rgba(255,255,255, 0.9);
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    transition: all .2s ease-in-out;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    form {
+        display: none;
+        flex-direction: column;
+
+        &.active {
+            display: flex;
+        }
+
+        .btn {
+            font-size: 1rem;
+            border: none !important;
+            box-shadow: none !important;
+            padding: .5rem 1.5rem;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .forms {
+        transition: all .1s ease-in-out;
+        clip-path: none;
+    }
+}
+
+#main-container {
+    overflow: hidden;
+}
