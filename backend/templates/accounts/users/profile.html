@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row g-4 mt-1">
+	<div class="col-12 col-lg-4 text-center">
+		<h1 class="mb-4">{{ profile_user }}</h1>
+		<img src="{{ profile_user.avatar.url }}" alt="{% translate 'avatar' %}" class="img-thumbnail img-fluid">
+	</div>
+	<div class="col-12 col-lg-8">
+		<div class="row row-cols-1 row-cols-lg-3 justify-content-between text-break">
+			<div class="col text-justify text-lg-start">
+				<h2 class="text-primary text-center">{% translate 'Score' %}</h2>
+				{% if average_ratings %}
+					<h4 class="text-secondary">
+						{% translate 'Overall' %}:<br>
+						<span class="stars" style="--rating: {{ average_ratings.overall|floatformat:'2u' }};"></span>
+					</h4>
+					<p class="fs-5">
+						{% translate 'Hard skills' %}:<br>
+						<span class="stars" style="--rating: {{ average_ratings.hard_skills|floatformat:'2u' }};"></span>
+					</p>
+					<p class="fs-5">
+						{% translate 'Soft skills' %}:<br>
+						<span class="stars" style="--rating: {{ average_ratings.soft_skills|floatformat:'2u' }};"></span>
+					</p>
+					<p class="fs-5">
+						{% translate 'Performance' %}:<br>
+						<span class="stars" style="--rating: {{ average_ratings.performance|floatformat:'2u' }};"></span>
+					</p>
+					<p class="fs-5">
+						{% translate 'Activity' %}:<br>
+						<span class="stars" style="--rating: {{ average_ratings.activity|floatformat:'2u' }};"></span>
+					</p>
+				{% else %}
+					<p>{% translate 'No ratings to display' %}</p>
+				{% endif %}
+			</div>
+			<div class="col text-justify text-lg-start">
+				<h2 class="text-primary text-center">{% translate 'Projects' %}</h2>
+				{% if profile_user.memberships.exists %}
+					<ul class="list-unstyled">
+						{% for membership in profile_user.memberships.all %}
+							<li>{{ membership.project.name }} {% translate 'as' %} {{ membership.get_role_display }}</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>{% translate 'No projects to display' %}</p>
+				{% endif %}
+			</div>
+			<div class="col text-justify text-lg-start">
+				<h2 class="text-primary text-center">{% translate 'Completed tasks' %}</h2>
+				{% if number_of_completed_tasks %}
+					<h4 class="text-secondary text-center">
+						{% translate 'Overall' %}: {{ number_of_completed_tasks }}
+					</h4>
+					<ul class="list-unstyled">
+						{% for project, number_of_completed_tasks_in_project in number_of_completed_tasks_per_project.items %}
+							<li>{{ project }}: {{ number_of_completed_tasks_in_project }}</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>{% translate 'No tasks completed' %}</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

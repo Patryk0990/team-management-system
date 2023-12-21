@@ -1,0 +1,134 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row top-controls align-items-center flex-column flex-lg-row mb-2 bg-dark-subtle">
+	<a class="btn col-auto ms-lg-auto text-center" role="button" data-bs-toggle="modal" data-bs-target="#createUserModal">
+		<i class="bi bi-person-fill-add fs-4"></i>
+		{% translate "Create user" %}
+	</a>
+</div>
+
+<h1 class="text-center">{% translate "Users" %}</h1>
+<div class="row g-4 mt-1 justify-content-center row-cols-1 row-cols-lg-auto mb-3">
+	{% if users %}
+		<div class="col">
+			<table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{% translate 'E-mail' %}</th>
+                        <th scope="col">{% translate 'Staff' %}</th>
+                        <th scope="col">{% translate 'Super user' %}</th>
+                        <th scope="col">{% translate 'Active' %}</th>
+                        <th scope="col">{% translate 'Last login' %}</th>
+                        <th scope="col">{% translate 'Date joined' %}</th>
+                        <th scope="col">{% translate 'Actions' %}</th>
+                    </tr>
+                </thead>
+				<tbody>
+					{% for user in users %}
+						{% url 'user-profile' pk=user.pk as profile_url %}
+						<tr role="button" data-target="modify-user-form" onclick="setFormData(event, true, {'/0/': '/{{ user.pk }}/'}); bootstrap.Modal.getOrCreateInstance(document.getElementById('modifyUserModal')).show();">
+							<td scope="row">{{ user.id }}</td>
+							<td>{{ user.email }}</td>
+							<td>
+								{% if user.is_staff %}
+									<i class="bi bi-check text-success"></i>
+								{% else %}
+									<i class="bi bi-x text-danger"></i>
+								{% endif %}
+							</td>
+							<td>
+								{% if user.is_superuser %}
+									<i class="bi bi-check text-success"></i>
+								{% else %}
+									<i class="bi bi-x text-danger"></i>
+								{% endif %}
+							</td>
+							<td>
+								{% if user.is_active %}
+									<i class="bi bi-check text-success"></i>
+								{% else %}
+									<i class="bi bi-x text-danger"></i>
+								{% endif %}
+							</td>
+							<td>{{ user.last_login }}</td>
+							<td>{{ user.date_joined }}</td>
+							<td>
+								<a href="{{ profile_url }}" target="_blank" onclick="event.stopPropagation();"><i class="bi bi-search text-info p-1 opacity-75"></i></a>
+								<i class="bi bi-trash-fill text-danger p-1 opacity-75" data-bs-toggle="modal" data-bs-target="#deleteUserModal" role="button" onclick="setDeleteData(event, {'/0/': '/{{ user.pk }}/'})"></i>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% else %}
+		<p class="text-center">{% translate 'No users to display' %}</p>
+	{% endif %}
+</div>
+
+<div class="modal fade" id="createUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="createUserModalLabel"> {% translate "New user" %} </h1>
+				<button type="reset" class="btn-close" data-target="create-user-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="create-user-form" method="POST" action="{% url 'api-user-create' %}" autocomplete="off">
+					{% csrf_token %}
+					{{ user_form }}
+				</form>
+				<div id="create-user-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="create-user-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="create-user-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modifyUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="modifyUserModalLabel"> {% translate "User" %} </h1>
+				<i class="bi bi-pencil-fill fs-5 icon-button ms-3 text-success" data-target="modify-user-form" role="button" data-state="disabled" onclick="toggleFormInputs(event)"></i>
+				<button type="reset" class="btn-close" data-target="modify-user-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="modify-user-form" method="POST" data-schema-url="{% url 'api-user-modify' pk='0' %}" autocomplete="off">
+					{% csrf_token %}
+				</form>
+				<div id="modify-user-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="modify-user-form" data-bs-dismiss="modal" onclick="closeForm(event, true, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="modify-user-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="deleteUserModalLabel"> {% translate "Delete user" %} </h1>
+				<button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteData(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				{% translate "Do you want to remove it?" %}
+				<div id="delete-user-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteData(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-response-container-id="delete-user-response" data-schema-url="{% url 'api-user-delete' pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

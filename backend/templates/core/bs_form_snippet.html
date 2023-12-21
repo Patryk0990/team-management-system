@@ -1,0 +1,37 @@
+{% for field in form %}
+{% if field.field.widget.input_type == "checkbox" %}
+	<div class="form-check">
+		{{ field.label }}
+{% else %}
+	<div class="form-group">
+		{{ field.label_tag }}
+{% endif %}
+		{% if field.help_text %}
+			{% with "title="|add_str:field.help_text as tooltip_attr %}
+				{% if field.errors %}
+					{{ field|add_class:'form-control'|add_class:'is-invalid'|add_attr:'data-bs-toggle=tooltip'|add_attr:'data-bs-html=true'|add_attr:tooltip_attr }}
+					<div class="invalid-feedback">
+				        {% for error in field.errors %}
+				            {{ error }}<br>
+				        {% endfor %}
+					</div>
+				{% elif field.field.widget.input_type == "checkbox" %}
+					{{ field|add_class:'form-check-input'|add_attr:'data-bs-toggle=tooltip'|add_attr:'data-bs-html=true'|add_attr:tooltip_attr }}
+				{% else %}
+					{{ field|add_class:'form-control'|add_attr:'data-bs-toggle=tooltip'|add_attr:'data-bs-html=true'|add_attr:tooltip_attr }}
+				{% endif %}
+			{% endwith %}
+		{% elif field.errors %}
+			{{ field|add_class:'form-control'|add_class:'is-invalid'}}
+			<div class="invalid-feedback">
+	        {% for error in field.errors %}
+	            {{ error }}<br>
+	        {% endfor %}
+	        </div>
+		{% elif field.field.widget.input_type == "checkbox" %}
+			{{ field|add_class:'form-check-input' }}
+		{% else %}
+			{{ field|add_class:'form-control' }}
+		{% endif %}
+	</div>
+{% endfor %}

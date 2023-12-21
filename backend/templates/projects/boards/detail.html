@@ -1,0 +1,316 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="row top-controls align-items-center flex-column flex-lg-row mb-2 bg-dark-subtle">
+	<a href="{% url 'project' project_pk=board.project.pk %}" class="btn col-auto text-center" role="button">
+		<i class="bi bi-arrow-left-square-fill fs-4"></i>
+		{{ board.project.name }}
+	</a>
+
+	<a class="btn col-auto ms-lg-auto text-center" role="button" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+		<i class="bi bi-file-plus-fill fs-4"></i>
+		{% translate "Create task" %}
+	</a>
+
+	{% if request.user.is_superuser or request.user|is_project_manager:board.project %}
+		<a class="btn col-auto text-center" role="button" data-bs-toggle="modal" data-bs-target="#createBoardColumnModal">
+			<i class="bi bi-folder-plus fs-4"></i>
+			{% translate "Create board column" %}
+		</a>
+	{% endif %}
+
+
+	<div class="col-auto text-center">
+		<div class="dropdown-center">
+			<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="bi bi-gear-fill fs-4"></i>
+				{% translate "Settings" %}
+			</button>
+			<ul class="dropdown-menu">
+				{% if request.user.is_superuser or request.user|is_project_manager:board.project %}
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modifyBoardColumnModal">
+							{% translate 'Manage board columns' %}
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteBoardColumnModal">
+							{% translate 'Delete board columns' %}
+						</a>
+					</li>
+				{% endif %}
+				<li>
+					<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#restoreTaskModal">
+						{% translate 'Restore task' %}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<h1 class="text-center">{% translate "Boards" %}</h1>
+<h2 class="text-center text-secondary"> {{ board.name }} </h2>
+
+<div class="row g-4 mt-1 row-cols-1 row-cols-md-2 row-cols-xl-4 mb-3">
+	{% if board.columns.exists %}
+		{% for column in board.columns.all %}
+			<div class="col mt-0 py-2 border-secondary-subtle split-cols" id="board-column-{{ column.pk }}">
+				<h3 class="text-center mb-2">{{ column.name }}</h3>
+				{% if column.tasks.exists %}
+					{% for task in column.tasks.all %}
+						{% if not task.is_archived %}
+							<div class="card mb-1" role="button" data-target="modify-task-form" onclick="setFormData(event, true, {'/0/': '/{{ task.pk }}/'}); bootstrap.Modal.getOrCreateInstance(document.getElementById('modifyTaskModal')).show();">
+								<div class="card-body p-1 d-flex align-items-center">
+									<i class="bi bi-bar-chart-fill p-1 priority-{{ task.priority }} opacity-75"></i>
+									<span class="card-title mb-0 text-center text-wrap text-break px-2 me-auto">{{ task.name }}</span>
+									<div class="d-flex flex-row flex-md-column flex-lg-row">
+										<i class="bi bi-chat-left-fill text-info px-3 px-lg-2 py-2 opacity-75" data-bs-toggle="modal" data-bs-target="#taskCommentsModal" data-elements-target="task-comments" data-target="add-task-comment-form" role="button" onclick="changeListWithCreateModal(event, {'/0/': '/{{ task.pk }}/'});"></i>
+										<i class="bi bi-archive-fill text-warning px-3 px-lg-2 py-2 opacity-75" data-bs-toggle="modal" data-bs-target="#archiveTaskModal" role="button" onclick="setDeleteData(event, {'/0/': '/{{ task.pk }}/'})"></i>
+										<i class="bi bi-trash-fill text-danger px-3 px-lg-2 py-2 opacity-75" data-bs-toggle="modal" data-bs-target="#deleteTaskModal" role="button" onclick="setDeleteData(event, {'/0/': '/{{ task.pk }}/'})"></i>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div>
+		{% endfor %}
+	{% else %}
+		<p class="text-center">{% translate 'No columns to display' %}</p>
+	{% endif %}
+</div>
+
+<div class="modal fade" id="createTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="createTaskModalLabel"> {% translate "New task" %} </h1>
+				<button type="reset" class="btn-close" data-target="create-task-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="create-task-form" method="POST" action="{% url 'api-task-create' project_pk=board.project.pk board_pk=board.pk %}" autocomplete="off">
+					{% csrf_token %}
+					{{ task_form }}
+				</form>
+				<div id="create-task-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="create-task-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="create-task-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modifyTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyTaskModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="modifyTaskModalLabel"> {% translate "Task" %} </h1>
+				<i class="bi bi-pencil-fill fs-5 icon-button ms-3 text-success" data-target="modify-task-form" role="button" data-state="disabled" onclick="toggleFormInputs(event)"></i>
+				<button type="reset" class="btn-close" data-target="modify-task-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true, true)"></button>
+			</div>
+			<div class="modal-body">
+				<form id="modify-task-form" method="POST" data-schema-url="{% url 'api-task-modify' project_pk=board.project.pk board_pk=board.pk pk='0' %}" autocomplete="off">
+					{% csrf_token %}
+				</form>
+				<div id="modify-task-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-target="modify-task-form" data-bs-dismiss="modal" onclick="closeForm(event, true, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="modify-task-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="archiveTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="archiveTaskModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="archiveTaskModalLabel"> {% translate "Archive task" %} </h1>
+				<button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteData(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				{% translate "Do you want to archive this task and mark it as done?" %}
+				<div id="archive-task-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteData(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-response-container-id="archive-task-response" data-schema-url="{% url 'api-task-archive' project_pk=board.project.pk board_pk=board.pk pk='0' %}" data-action="" data-method="POST" onclick="submitDeleteModal(event)">{% translate "Archive" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="restoreTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="restoreTaskModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="restoreTaskModalLabel"> {% translate "Delete board column" %} </h1>
+				<button type="reset" class="btn-close" data-select-id="restore-task-select" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal(event)"></button>
+			</div>
+			<div class="modal-body modal-select">
+				<label for="restore-task-select">{% translate 'Select task' %}</label><br>
+				<select id="restore-task-select" class="form-control" onchange="changeDeleteFormData(event, {'0': this.options[this.selectedIndex].value})">
+					{% if board.columns.exists %}
+						<option disabled selected style="display: none;">---------</option>
+						{% for column in board.columns.all %}
+							{% if column.tasks.exists %}
+								{% for task in column.tasks.all %}
+									{% if task.is_archived %}
+										<option value="{{ task.pk }}">{{ task.name }}</option>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						<option disabled selected>{% translate 'No tasks to display' %}</option>
+					{% endif %}
+				</select>
+			</div>
+			<div class="modal-body" style="display:none;">
+				{% translate "Do you want to restore it?" %}
+				<div id="restore-task-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-select-id="restore-task-select" data-bs-dismiss="modal" onclick="closeDeleteModal(event)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-response-container-id="restore-task-response" data-schema-url="{% url 'api-task-restore' project_pk=board.project.pk board_pk=board.pk pk='0' %}" data-action="" data-method="POST" onclick="submitDeleteModal(event)">{% translate "Restore" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="deleteTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteTaskModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="deleteTaskModalLabel"> {% translate "Delete task" %} </h1>
+				<button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteData(event, true)"></button>
+			</div>
+			<div class="modal-body">
+				{% translate "Do you want to remove it?" %}
+				<div id="delete-task-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeDeleteData(event, true)">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-response-container-id="delete-task-response" data-schema-url="{% url 'api-task-delete' project_pk=board.project.pk board_pk=board.pk pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="taskCommentsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="taskCommentsModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="taskCommentsModalLabel"> {% translate "Comments" %} </h1>
+				<button type="reset" class="btn-close" data-elements-target="task-comments" data-target="add-task-comment-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeListWithCreateModal(event);"></button>
+			</div>
+			<div class="modal-body">
+				<div id="task-comments" data-schema-url="{% url 'api-task-comment-list' project_pk=board.project.pk board_pk=board.pk task_pk='0' %}"></div>
+			</div>
+			<div class="modal-body">
+				<form id="add-task-comment-form" method="POST" data-schema-url="{% url 'api-task-comment-create' project_pk=board.project.pk board_pk=board.pk task_pk='0' %}" autocomplete="off">
+					{% csrf_token %}
+				</form>
+				<div id="add-task-comment-form-response"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="reset" class="btn btn-secondary" data-elements-target="task-comments" data-target="add-task-comment-form" data-bs-dismiss="modal" onclick="closeListWithCreateModal(event);">{% translate "Close" %}</button>
+				<button type="submit" class="btn btn-primary" data-target="add-task-comment-form" onclick="submitForm(event, true)">{% translate "Add comment" %}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if request.user.is_superuser or request.user|is_project_manager:board.project %}
+
+	<div class="modal fade" id="createBoardColumnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createBoardColumnModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="createBoardColumnModalLabel"> {% translate "New board column" %} </h1>
+					<button type="reset" class="btn-close" data-target="create-board-column-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm(event, true)"></button>
+				</div>
+				<div class="modal-body">
+					<form id="create-board-column-form" method="POST" action="{% url 'api-board-column-create' project_pk=board.project.pk board_pk=board.pk %}" autocomplete="off">
+						{% csrf_token %}
+						{{ board_column_form }}
+					</form>
+					<div id="create-board-column-form-response"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-target="create-board-column-form" data-bs-dismiss="modal" onclick="closeForm(event, true)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="create-board-column-form" onclick="submitForm(event)">{% translate "Create" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modifyBoardColumnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyBoardColumnModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modifyBoardColumnModalLabel"> {% translate "Board column" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="modify-board-column-select" data-target="modify-board-column-form" data-bs-dismiss="modal" aria-label="Close" onclick="closeModifyModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="modify-board-column-select">{% translate 'Select board column' %}</label><br>
+					<select id="modify-board-column-select" class="form-control" data-target="modify-board-column-form" onchange="changeModifyFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if board.columns.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for column in board.columns.all %}
+								<option value="{{ column.pk }}">{{ column.name }}</option>
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No columns to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display: none">
+					<form id="modify-board-column-form" method="POST" data-schema-url="{% url 'api-board-column-modify' project_pk=board.project.pk board_pk=board.pk pk='0' %}" autocomplete="off">
+						{% csrf_token %}
+					</form>
+					<div id="modify-board-column-form-response"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="modify-board-column-select" data-target="modify-board-column-form" data-bs-dismiss="modal" onclick="closeModifyModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-target="modify-board-column-form" onclick="submitForm(event, true)">{% translate "Modify" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="deleteBoardColumnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteBoardColumnModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteBoardColumnModalLabel"> {% translate "Delete board column" %} </h1>
+					<button type="reset" class="btn-close" data-select-id="delete-board-column-select" data-bs-dismiss="modal" aria-label="Close" onclick="closeDeleteModal(event)"></button>
+				</div>
+				<div class="modal-body modal-select">
+					<label for="delete-board-column-select">{% translate 'Select board column' %}</label><br>
+					<select id="delete-board-column-select" class="form-control" onchange="changeDeleteFormData(event, {'0': this.options[this.selectedIndex].value})">
+						{% if board.columns.exists %}
+							<option disabled selected style="display: none;">---------</option>
+							{% for column in board.columns.all %}
+								<option value="{{ column.pk }}">{{ column.name }}</option>
+							{% endfor %}
+						{% else %}
+							<option disabled selected>{% translate 'No columns to display' %}</option>
+						{% endif %}
+					</select>
+				</div>
+				<div class="modal-body" style="display:none;">
+					{% translate "Do you want to remove it?" %}
+					<div id="delete-board-column-response"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-secondary" data-select-id="delete-board-column-select" data-bs-dismiss="modal" onclick="closeDeleteModal(event)">{% translate "Close" %}</button>
+					<button type="submit" class="btn btn-primary" data-response-container-id="delete-board-column-response" data-schema-url="{% url 'api-board-column-delete' project_pk=board.project.pk board_pk=board.pk pk='0' %}" data-action="" data-method="DELETE" onclick="submitDeleteModal(event)">{% translate "Confirm" %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endif %}
+
+{% endblock %}

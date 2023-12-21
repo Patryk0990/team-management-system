@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<div class="row gx-0 gy-3">
+	{% for comment in page_obj %}
+		<div>
+			<img src="{{ comment.project_member.user.avatar.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
+			<strong>{{ comment.project_member.user }}:</strong><br>
+			<span class="text-justify">{{ comment.content }}</span><br>
+			<span class="text-end small">{{ comment.created_at }}</span>
+		</div>
+	{% endfor %}
+</div>
+
+<nav aria-label="{% translate 'Task comments page navigation' %}">
+    <ul class="pagination pagination-sm text-primary justify-content-center">
+	    <li class="page-item {% if page_obj.number == 1%}disabled{% endif %}">
+	        <a class="page-link" data-page="1" onclick="getNewList(event);" aria-label="{% translate 'Latest' %}">
+	            <span aria-hidden="true">&laquo;</span>
+	        </a>
+	    </li>
+
+	    {% if page_obj.has_previous %}
+	        <li class="page-item"><a class="page-link" data-page="{{ page_obj.previous_page_number }}" onclick="getNewList(event);">{{ page_obj.previous_page_number }}</a></li>
+	    {% endif %}
+	    <li class="page-item active"><a class="page-link">{{ page_obj.number }}</a></li>
+	    {% if page_obj.has_next %}
+	        <li class="page-item"><a class="page-link" data-page="{{ page_obj.next_page_number }}" onclick="getNewList(event);">{{ page_obj.next_page_number }}</a></li>
+	    {% endif %}
+
+	    <li class="page-item {% if page_obj.number == page_obj.paginator.num_pages %}disabled{% endif %}">
+	      <a class="page-link" data-page="{{ page_obj.paginator.num_pages }}" onclick="getNewList(event);" aria-label="{% translate 'Oldest' %}">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+    </ul>
+</nav>
