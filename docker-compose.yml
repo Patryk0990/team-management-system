@@ -22,10 +22,8 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - ./backend:/backend
+      - ./backend:/code
     depends_on:
-      - db
-    links:
       - db
 
 volumes:
