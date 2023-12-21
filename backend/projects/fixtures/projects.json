@@ -1,0 +1,674 @@
+[
+{
+    "model": "projects.project",
+    "pk": 1,
+    "fields": {
+        "name": "Chatbots",
+        "description": "Chatbots application with usage of OpenAI fine-tuned models"
+    }
+},
+{
+    "model": "projects.project",
+    "pk": 2,
+    "fields": {
+        "name": "Smart Office",
+        "description": "Smart Home implementation to client's office"
+    }
+},
+{
+    "model": "projects.project",
+    "pk": 3,
+    "fields": {
+        "name": "AWF",
+        "description": "Asynchroniczne wykonywanie funkcji"
+    }
+},
+{
+    "model": "projects.project",
+    "pk": 4,
+    "fields": {
+        "name": "GTR",
+        "description": "Grand Tier Records"
+    }
+},
+{
+    "model": "projects.board",
+    "pk": 1,
+    "fields": {
+        "name": "Kanban",
+        "project": 2
+    }
+},
+{
+    "model": "projects.board",
+    "pk": 2,
+    "fields": {
+        "name": "SCRUM",
+        "project": 2
+    }
+},
+{
+    "model": "projects.board",
+    "pk": 3,
+    "fields": {
+        "name": "Testowa tablica",
+        "project": 3
+    }
+},
+{
+    "model": "projects.board",
+    "pk": 4,
+    "fields": {
+        "name": "Tablica testowa",
+        "project": 4
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 1,
+    "fields": {
+        "name": "Backlog",
+        "board": 1
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 2,
+    "fields": {
+        "name": "In progress",
+        "board": 1
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 3,
+    "fields": {
+        "name": "Review",
+        "board": 1
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 4,
+    "fields": {
+        "name": "Done",
+        "board": 1
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 5,
+    "fields": {
+        "name": "Kolumna 1",
+        "board": 3
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 6,
+    "fields": {
+        "name": "Kolumna 2",
+        "board": 3
+    }
+},
+{
+    "model": "projects.boardcolumn",
+    "pk": 7,
+    "fields": {
+        "name": "Kolumna testowa",
+        "board": 4
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 1,
+    "fields": {
+        "role": "MAN",
+        "user": 2,
+        "project": 1
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 2,
+    "fields": {
+        "role": "MAN",
+        "user": 1,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 3,
+    "fields": {
+        "role": "DEV",
+        "user": 2,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 4,
+    "fields": {
+        "role": "DEV",
+        "user": 3,
+        "project": 1
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 5,
+    "fields": {
+        "role": "DEV",
+        "user": 3,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 6,
+    "fields": {
+        "role": "TES",
+        "user": 5,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 7,
+    "fields": {
+        "role": "DEV",
+        "user": 6,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 8,
+    "fields": {
+        "role": "DEV",
+        "user": 8,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 9,
+    "fields": {
+        "role": "TES",
+        "user": 7,
+        "project": 2
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 10,
+    "fields": {
+        "role": "MAN",
+        "user": 1,
+        "project": 3
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 11,
+    "fields": {
+        "role": "MAN",
+        "user": 1,
+        "project": 4
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 12,
+    "fields": {
+        "role": "DEV",
+        "user": 5,
+        "project": 3
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 13,
+    "fields": {
+        "role": "TES",
+        "user": 3,
+        "project": 3
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 14,
+    "fields": {
+        "role": "DEV",
+        "user": 8,
+        "project": 4
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 15,
+    "fields": {
+        "role": "DEV",
+        "user": 2,
+        "project": 3
+    }
+},
+{
+    "model": "projects.projectmember",
+    "pk": 16,
+    "fields": {
+        "role": "TES",
+        "user": 2,
+        "project": 4
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 1,
+    "fields": {
+        "hard_skills": 5,
+        "soft_skills": 5,
+        "performance": 5,
+        "activity": 5,
+        "project_member": 3
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 2,
+    "fields": {
+        "hard_skills": 1,
+        "soft_skills": 2,
+        "performance": 1,
+        "activity": 2,
+        "project_member": 6
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 3,
+    "fields": {
+        "hard_skills": 3,
+        "soft_skills": 3,
+        "performance": 3,
+        "activity": 3,
+        "project_member": 9
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 4,
+    "fields": {
+        "hard_skills": 4,
+        "soft_skills": 4,
+        "performance": 3,
+        "activity": 3,
+        "project_member": 5
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 5,
+    "fields": {
+        "hard_skills": 5,
+        "soft_skills": 5,
+        "performance": 5,
+        "activity": 5,
+        "project_member": 8
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 6,
+    "fields": {
+        "hard_skills": 5,
+        "soft_skills": 4,
+        "performance": 5,
+        "activity": 5,
+        "project_member": 7
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 7,
+    "fields": {
+        "hard_skills": 4,
+        "soft_skills": 3,
+        "performance": 5,
+        "activity": 3,
+        "project_member": 15
+    }
+},
+{
+    "model": "projects.projectmemberrating",
+    "pk": 8,
+    "fields": {
+        "hard_skills": 2,
+        "soft_skills": 4,
+        "performance": 3,
+        "activity": 5,
+        "project_member": 16
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 1,
+    "fields": {
+        "name": "Rozpoznawanie osób",
+        "description": "Wykrywanie osób wchodzących i wychodzących z biura za pomocą kamer",
+        "priority": "L",
+        "created_at": "2023-09-16T12:11:41.298Z",
+        "modified_at": "2023-12-21T18:37:18.660Z",
+        "is_archived": false,
+        "board_column": 1,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 2,
+    "fields": {
+        "name": "Rozpoznawanie głosu",
+        "description": "Wykrywaj osoby rozmawiające z naszymi urządzeniami i używaj sztucznej inteligencji do interpretowania poleceń",
+        "priority": "H",
+        "created_at": "2023-09-16T12:14:11.597Z",
+        "modified_at": "2023-12-21T18:36:48.271Z",
+        "is_archived": false,
+        "board_column": 2,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 3,
+    "fields": {
+        "name": "Wdrożenie serwera do obsługi urządzeń",
+        "description": "Wdrożenie połączenia serwera i urządzeń z serwerem. Serwer będzie obsługiwał wszystkie przychodzące żądania urządzeń",
+        "priority": "L",
+        "created_at": "2023-09-16T12:17:29.642Z",
+        "modified_at": "2023-12-21T18:37:27.041Z",
+        "is_archived": false,
+        "board_column": 3,
+        "created_by": 2,
+        "assigned_to": 6
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 4,
+    "fields": {
+        "name": "Dostrajanie modelu sztucznej inteligencji",
+        "description": "Tworzenie skryptu do automatycznego okresowego dostrajania modelu AI",
+        "priority": "M",
+        "created_at": "2023-09-16T12:19:55.018Z",
+        "modified_at": "2023-12-21T18:36:35.742Z",
+        "is_archived": false,
+        "board_column": 3,
+        "created_by": 3,
+        "assigned_to": 2
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 5,
+    "fields": {
+        "name": "Badania nad urządzeniami",
+        "description": "Badania nad możliwymi urządzeniami do wdrożenia w biurze dla SmartHome",
+        "priority": "H",
+        "created_at": "2023-09-16T12:57:02.017Z",
+        "modified_at": "2023-12-21T18:35:50.781Z",
+        "is_archived": false,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 2
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 6,
+    "fields": {
+        "name": "Zadanie 1",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:14.310Z",
+        "modified_at": "2023-12-21T18:43:33.530Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 7,
+    "fields": {
+        "name": "Zadanie 2",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:18.588Z",
+        "modified_at": "2023-12-21T18:43:36.446Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 8,
+    "fields": {
+        "name": "Zadanie 3",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:20.869Z",
+        "modified_at": "2023-12-21T18:43:38.472Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 9,
+    "fields": {
+        "name": "Zadanie 4",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:23.438Z",
+        "modified_at": "2023-12-21T18:43:40.728Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 10,
+    "fields": {
+        "name": "Zadanie 5",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:26.799Z",
+        "modified_at": "2023-12-21T18:43:42.815Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 11,
+    "fields": {
+        "name": "Zadanie 6",
+        "description": "Opis zadania",
+        "priority": "L",
+        "created_at": "2023-12-21T18:43:29.258Z",
+        "modified_at": "2023-12-21T18:43:45.175Z",
+        "is_archived": true,
+        "board_column": 4,
+        "created_by": 2,
+        "assigned_to": 3
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 12,
+    "fields": {
+        "name": "Zadanie 1",
+        "description": "Zadanie testowe",
+        "priority": "M",
+        "created_at": "2023-12-21T18:48:33.459Z",
+        "modified_at": "2023-12-21T18:48:33.459Z",
+        "is_archived": false,
+        "board_column": 5,
+        "created_by": 10,
+        "assigned_to": 15
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 13,
+    "fields": {
+        "name": "Zadanie 2",
+        "description": "Zadanie testowe",
+        "priority": "M",
+        "created_at": "2023-12-21T18:48:35.499Z",
+        "modified_at": "2023-12-21T18:49:01.752Z",
+        "is_archived": true,
+        "board_column": 5,
+        "created_by": 10,
+        "assigned_to": 15
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 14,
+    "fields": {
+        "name": "Zadanie 3",
+        "description": "Zadanie testowe",
+        "priority": "M",
+        "created_at": "2023-12-21T18:48:43.207Z",
+        "modified_at": "2023-12-21T18:48:43.207Z",
+        "is_archived": false,
+        "board_column": 6,
+        "created_by": 10,
+        "assigned_to": 13
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 15,
+    "fields": {
+        "name": "Zadanie 4",
+        "description": "Zadanie testowe",
+        "priority": "H",
+        "created_at": "2023-12-21T18:48:49.957Z",
+        "modified_at": "2023-12-21T18:48:54.528Z",
+        "is_archived": true,
+        "board_column": 6,
+        "created_by": 10,
+        "assigned_to": 15
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 16,
+    "fields": {
+        "name": "Zadanie testowe",
+        "description": "Brak opisu",
+        "priority": "L",
+        "created_at": "2023-12-21T18:49:40.226Z",
+        "modified_at": "2023-12-21T18:49:40.226Z",
+        "is_archived": false,
+        "board_column": 7,
+        "created_by": 11,
+        "assigned_to": 16
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 17,
+    "fields": {
+        "name": "Zadanie testowe 2",
+        "description": "Brak opisu",
+        "priority": "L",
+        "created_at": "2023-12-21T18:49:44.586Z",
+        "modified_at": "2023-12-21T18:49:53.268Z",
+        "is_archived": true,
+        "board_column": 7,
+        "created_by": 11,
+        "assigned_to": 16
+    }
+},
+{
+    "model": "projects.task",
+    "pk": 18,
+    "fields": {
+        "name": "Zadanie testowe 3",
+        "description": "Brak opisu",
+        "priority": "H",
+        "created_at": "2023-12-21T18:49:48.557Z",
+        "modified_at": "2023-12-21T18:49:51.287Z",
+        "is_archived": true,
+        "board_column": 7,
+        "created_by": 11,
+        "assigned_to": 16
+    }
+},
+{
+    "model": "projects.taskcomment",
+    "pk": 1,
+    "fields": {
+        "content": "Coś więcej na ten temat",
+        "created_at": "2023-12-21T18:38:19.772Z",
+        "project_member": 2,
+        "task": 4
+    }
+},
+{
+    "model": "projects.taskcomment",
+    "pk": 2,
+    "fields": {
+        "content": "Rozpisz to",
+        "created_at": "2023-12-21T18:38:29.218Z",
+        "project_member": 2,
+        "task": 1
+    }
+},
+{
+    "model": "projects.taskcomment",
+    "pk": 3,
+    "fields": {
+        "content": "Co przez to rozumiesz?",
+        "created_at": "2023-12-21T18:38:35.997Z",
+        "project_member": 2,
+        "task": 5
+    }
+},
+{
+    "model": "projects.taskcomment",
+    "pk": 4,
+    "fields": {
+        "content": "Też tak sądzę :)",
+        "created_at": "2023-12-21T18:39:27.587Z",
+        "project_member": 3,
+        "task": 1
+    }
+},
+{
+    "model": "projects.taskcomment",
+    "pk": 5,
+    "fields": {
+        "content": "Lorem ipsum",
+        "created_at": "2023-12-21T18:39:48.740Z",
+        "project_member": 3,
+        "task": 5
+    }
+}
+]
