@@ -7,8 +7,7 @@ class AdminUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'first_name', 'last_name', 'email', 'password', 'is_superuser', 'is_staff', 'is_active', 'avatar',
-            'phone_number',
+            'first_name', 'last_name', 'email', 'password', 'is_superuser', 'is_active', 'avatar', 'phone_number',
         ]
         widgets = {
             'password': forms.PasswordInput(),

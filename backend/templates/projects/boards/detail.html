@@ -58,7 +58,7 @@
 <div class="row g-4 mt-1 row-cols-1 row-cols-md-2 row-cols-xl-4 mb-3">
 	{% if board.columns.exists %}
 		{% for column in board.columns.all %}
-			<div class="col mt-0 py-2 border-secondary-subtle split-cols" id="board-column-{{ column.pk }}">
+			<div class="col mt-0 py-2 border-secondary-subtle split-cols h-100" id="board-column-{{ column.pk }}">
 				<h3 class="text-center mb-2">{{ column.name }}</h3>
 				{% if column.tasks.exists %}
 					{% for task in column.tasks.all %}

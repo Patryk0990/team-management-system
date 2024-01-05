@@ -84,7 +84,7 @@
 					<ul class="list-unstyled ms-4">
 						{% if user_tasks %}
 							{% for task in user_tasks %}
-								<li>{{ task.name }} - {{ task.get_priority_display }} ({{ task.board_column.name }})</li>
+								<li><a href="url 'board' project_pk=task.board_column.board.project.pk pk=task.board_column.board.pk">{{ task.name }} - {{ task.get_priority_display }} ({{ task.board_column.name }})</a></li>
 							{% endfor %}
 						{% else %}
 							{% translate "No assigned tasks" %}

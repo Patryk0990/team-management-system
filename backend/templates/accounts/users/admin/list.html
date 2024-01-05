@@ -19,7 +19,6 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">{% translate 'E-mail' %}</th>
-                        <th scope="col">{% translate 'Staff' %}</th>
                         <th scope="col">{% translate 'Super user' %}</th>
                         <th scope="col">{% translate 'Active' %}</th>
                         <th scope="col">{% translate 'Last login' %}</th>
@@ -33,13 +32,6 @@
 						<tr role="button" data-target="modify-user-form" onclick="setFormData(event, true, {'/0/': '/{{ user.pk }}/'}); bootstrap.Modal.getOrCreateInstance(document.getElementById('modifyUserModal')).show();">
 							<td scope="row">{{ user.id }}</td>
 							<td>{{ user.email }}</td>
-							<td>
-								{% if user.is_staff %}
-									<i class="bi bi-check text-success"></i>
-								{% else %}
-									<i class="bi bi-x text-danger"></i>
-								{% endif %}
-							</td>
 							<td>
 								{% if user.is_superuser %}
 									<i class="bi bi-check text-success"></i>
