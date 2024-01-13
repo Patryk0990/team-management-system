@@ -73,7 +73,7 @@ body {
   }
 }
 
-@include media-breakpoint-between(md, lg) {
+@include media-breakpoint-between(md, xl) {
   .split-cols {
     &:nth-child(odd) {
       border-right: 2px solid;
@@ -198,6 +198,7 @@ a {
 }
 
 .card {
+  height: 100%;
   transition: all .25s;
   &:hover {
     transform: scale(1.025);
